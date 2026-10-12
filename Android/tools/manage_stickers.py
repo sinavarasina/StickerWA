@@ -23,7 +23,7 @@ TRAY_SIZE = (96, 96)
 MAX_STATIC_KB = 100
 MAX_ANIMATED_KB = 500
 MAX_TRAY_KB = 50
-MIN_STICKERS = 3
+MIN_STICKERS = 1
 MAX_STICKERS = 30
 MAX_PACKS = 10
 
@@ -190,6 +190,14 @@ def generate_tray_icon(source_image_path: Path, output_tray_path: Path):
         canvas.save(output_tray_path, "PNG", optimize=True)
 
 
+def sanitize_url(url: str) -> str:
+    """Ensures URL starts with http:// or https:// if provided."""
+    url = (url or "").strip()
+    if url and not (url.startswith("http://") or url.startswith("https://")):
+        return f"https://{url}"
+    return url
+
+
 def load_pack_metadata(pack_dir: Path):
     """
     Loads metadata from optional pack_info.json or pack.json in the folder,
@@ -226,6 +234,7 @@ def load_pack_metadata(pack_dir: Path):
     has_animated = any(is_animated_image(st) for st in stickers)
     animated = data.get("animated_sticker_pack", has_animated)
 
+
     stickers_config = data.get("stickers", {})
 
     return {
@@ -237,9 +246,9 @@ def load_pack_metadata(pack_dir: Path):
         "avoid_cache": avoid_cache,
         "animated_sticker_pack": animated,
         "publisher_email": data.get("publisher_email", ""),
-        "publisher_website": data.get("publisher_website", ""),
-        "privacy_policy_website": data.get("privacy_policy_website", ""),
-        "license_agreement_website": data.get("license_agreement_website", ""),
+        "publisher_website": sanitize_url(data.get("publisher_website", "")),
+        "privacy_policy_website": sanitize_url(data.get("privacy_policy_website", "")),
+        "license_agreement_website": sanitize_url(data.get("license_agreement_website", "")),
         "stickers_config": stickers_config,
     }
 
@@ -299,7 +308,7 @@ def cmd_status(args):
         pack_type = "ANIMATED" if meta["animated_sticker_pack"] else "STATIC"
         print(f"\n📁 Pack: {pack_dir.name} ('{meta['name']}') [{pack_type}]")
         print(f"   Publisher : {meta['publisher']}")
-        print(f"   Stickers  : {len(stickers)} file(s) (WA requirement: 3 - 30)")
+        print(f"   Stickers  : {len(stickers)} file(s) (limit: {MIN_STICKERS} - {MAX_STICKERS})")
 
         # Tray status
         if tray_path.exists():
