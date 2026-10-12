@@ -25,7 +25,7 @@
             tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.samplestickerapp.StickerPackListActivity" />
+                android:value="id.my.sinanonym.stickerwa.StickerPackListActivity" />
         </activity>
         <activity
             android:name=".StickerPackInfoActivity"
@@ -34,7 +34,7 @@
             tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.samplestickerapp.StickerPackDetailsActivity" />
+                android:value="id.my.sinanonym.stickerwa.StickerPackDetailsActivity" />
         </activity>
 
         <provider

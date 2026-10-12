@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.example.samplestickerapp;
+package id.my.sinanonym.stickerwa;
 
 import android.content.Context;
 import android.util.AttributeSet;

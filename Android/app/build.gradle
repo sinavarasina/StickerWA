@@ -15,7 +15,7 @@ android {
     }
     compileSdkVersion 30
     defaultConfig {
-        applicationId "com.example.samplestickerapp"
+        applicationId "id.my.sinanonym.stickerwa"
         minSdkVersion 15
         targetSdkVersion 30
         versionCode 1
@@ -51,7 +51,7 @@ android {
         exclude 'lib/*/libnative-imagetranscoder.so'
         exclude 'lib/*/libnative-filters.so'
     }
-    namespace 'com.example.samplestickerapp'
+    namespace 'id.my.sinanonym.stickerwa'
 
     // Configures multiple APKs based on ABI.
     // see https://developer.android.com/studio/build/configure-apk-splits#configure-abi-split
