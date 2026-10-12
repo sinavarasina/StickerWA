@@ -1,0 +1,22 @@
+{
+  "name": "Hacker Series",
+  "publisher": "sinanonym",
+  "tray_image_file": "tray.png",
+  "image_data_version": "1",
+  "avoid_cache": false,
+  "animated_sticker_pack": false,
+  "stickers": {
+    "001_memet_hacker.webp": {
+      "emojis": ["💻", "🕶️"],
+      "accessibility_text": "Memet hacker with glasses"
+    },
+    "002_andika_didynata.webp": {
+      "emojis": ["🤖", "👨‍💻"],
+      "accessibility_text": "Andika Didynata hacker"
+    },
+    "003_dualisme_andika_rahman.webp": {
+      "emojis": ["🎭", "🤯"],
+      "accessibility_text": "Dualisme Andika Rahman"
+    }
+  }
+}

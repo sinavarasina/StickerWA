@@ -1,0 +1,40 @@
+# Android & Gradle
+.gradle/
+build/
+local.properties
+localhost/
+obj/
+*.apk
+*.ap_
+*.aab
+captures/
+
+# IDE & Editor files
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+*.egg-info/
+.pytest_cache/
+
+# iOS
+iOS/**/build/
+iOS/**/*.xcuserdatad
+iOS/**/*.xcuserstate
+iOS/**/.DS_Store
+
+# Misc
+Gemfile.lock
+_site/

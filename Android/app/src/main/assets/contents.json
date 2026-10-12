@@ -3,18 +3,142 @@
   "ios_app_store_link": "",
   "sticker_packs": [
     {
-      "identifier": "1",
-      "name": "StickerWA",
+      "identifier": "EmotSesunguhnya",
+      "name": "Emot Sesunguhnya",
       "publisher": "sinanonym",
       "tray_image_file": "tray.png",
       "image_data_version": "1",
       "avoid_cache": false,
-      "publisher_email": "",
-      "publisher_website": "",
+      "publisher_email": "sina@sinanonym.my.id",
+      "publisher_website": "sinanonym.my.id",
       "privacy_policy_website": "",
       "license_agreement_website": "",
       "animated_sticker_pack": false,
-      "stickers": []
+      "stickers": [
+        {
+          "image_file": "001_moai_asli_itera.webp",
+          "emojis": [
+            "\uD83D\uDDFF"
+          ]
+        }
+      ]
+    },
+    {
+      "identifier": "HackerSeries",
+      "name": "Hacker Series",
+      "publisher": "sinanonym",
+      "tray_image_file": "tray.png",
+      "image_data_version": "1",
+      "avoid_cache": false,
+      "publisher_email": "sina@sinanonym.my.id",
+      "publisher_website": "sinanonym.my.id",
+      "privacy_policy_website": "",
+      "license_agreement_website": "",
+      "animated_sticker_pack": false,
+      "stickers": [
+        {
+          "image_file": "001_memet_hacker.webp",
+          "emojis": [
+            "\uD83E\uDD2B",
+            "\uD83D\uDD12",
+            "\uD83D\uDED0"
+          ],
+          "accessibility_text": "Memet hacker rahasia itera"
+        },
+        {
+          "image_file": "002_andika_didynata.webp",
+          "emojis": [
+            "\uD83D\uDC68\u200D\uD83D\uDCBB",
+            "\uD83D\uDED0"
+          ],
+          "accessibility_text": "Andika Didynata master pencurryan data"
+        },
+        {
+          "image_file": "003_dualisme_andika_rahman.webp",
+          "emojis": [
+            "☯\uFE0F",
+            "\uD83D\uDED0"
+          ],
+          "accessibility_text": "Dualisme Pembokep Andika Rahman"
+        }
+      ]
+    },
+    {
+      "identifier": "Kindness",
+      "name": "Kindness",
+      "publisher": "sinanonym",
+      "tray_image_file": "tray.png",
+      "image_data_version": "1",
+      "avoid_cache": false,
+      "publisher_email": "sina@sinanonym.my.id",
+      "publisher_website": "sinanonym.my.id",
+      "privacy_policy_website": "",
+      "license_agreement_website": "",
+      "animated_sticker_pack": false,
+      "stickers": [
+        {
+          "image_file": "001_memet_morning.webp",
+          "emojis": [
+            "\uD83C\uDF05"
+          ]
+        },
+        {
+          "image_file": "002_memet_imlek.webp",
+          "emojis": [
+            "\uD83E\uDDE7"
+          ]
+        }
+      ]
+    },
+    {
+      "identifier": "SupremacySeries",
+      "name": "Supremacy Series",
+      "publisher": "sinanonym",
+      "tray_image_file": "tray.png",
+      "image_data_version": "1",
+      "avoid_cache": false,
+      "publisher_email": "sina@sinanonym.my.id",
+      "publisher_website": "sinanonym.my.id",
+      "privacy_policy_website": "",
+      "license_agreement_website": "",
+      "animated_sticker_pack": false,
+      "stickers": [
+        {
+          "image_file": "001_memet.webp",
+          "emojis": [
+            "\uD83D\uDED0"
+          ]
+        },
+        {
+          "image_file": "002_george.webp",
+          "emojis": [
+            "\uD83D\uDED0"
+          ]
+        }
+      ]
+    },
+    {
+      "identifier": "TelAvivSeries",
+      "name": "Tel Aviv Series",
+      "publisher": "sinanonym",
+      "tray_image_file": "tray.png",
+      "image_data_version": "1",
+      "avoid_cache": false,
+      "publisher_email": "sina@sinanonym.my.id",
+      "publisher_website": "sinanonym.my.id",
+      "privacy_policy_website": "",
+      "license_agreement_website": "",
+      "animated_sticker_pack": false,
+      "stickers": [
+        {
+          "image_file": "001_abieb_aksi_monas.webp",
+          "emojis": [
+            "\uD83C\uDDEE\uD83C\uDDF1",
+            "✡\uFE0F",
+            "\uD83D\uDD4E"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,19 @@
+{
+  "name": "Kindness",
+  "publisher": "sinanonym",
+  "tray_image_file": "tray.png",
+  "image_data_version": "1",
+  "animated_sticker_pack": false,
+  "stickers": {
+    "001_memet_morning.webp": {
+      "emojis": [
+        "😃"
+      ]
+    },
+    "002_memet_imlek.webp": {
+      "emojis": [
+        "😃"
+      ]
+    }
+  }
+}

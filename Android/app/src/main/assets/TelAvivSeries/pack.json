@@ -1,0 +1,14 @@
+{
+  "name": "Tel Aviv Series",
+  "publisher": "sinanonym",
+  "tray_image_file": "tray.png",
+  "image_data_version": "1",
+  "animated_sticker_pack": false,
+  "stickers": {
+    "001_abieb_aksi_monas.webp": {
+      "emojis": [
+        "😃"
+      ]
+    }
+  }
+}
