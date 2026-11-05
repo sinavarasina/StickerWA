@@ -9,6 +9,20 @@ obj/
 *.aab
 captures/
 
+# Signing keys & secrets
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.key
+*.pem
+*.pk8
+*.der
+*.bks
+signing.properties
+keystore_base64.txt
+keys.secret
+
 # IDE and Editor files
 .idea/
 *.iml
