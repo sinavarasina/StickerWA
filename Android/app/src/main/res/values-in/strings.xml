@@ -145,4 +145,14 @@
     <string name="create_pack_success_toast">Sticker pack \'%1$s\' berhasil dibuat!</string>
     <string name="submission_error_toast">Gagal membuat email submission: %1$s</string>
     <string name="batch_submission_error_toast">Gagal membuat batch email submission: %1$s</string>
+    <!-- Update Checker Strings -->
+    <string name="check_update_title">Periksa Pembaruan</string>
+    <string name="check_update_subtitle">Ketuk untuk memeriksa rilis terbaru di GitHub</string>
+    <string name="check_update_checking">Memeriksa pembaruan…</string>
+    <string name="check_update_up_to_date">StickerWA sudah versi terbaru (v%1$s)</string>
+    <string name="check_update_available_title">Pembaruan Tersedia: v%1$s</string>
+    <string name="check_update_available_msg">Versi baru StickerWA telah tersedia (v%1$s). Versi saat ini: v%2$s.\n\nApakah Anda ingin mengunduhnya?</string>
+    <string name="check_update_btn_download">Unduh</string>
+    <string name="check_update_btn_later">Nanti</string>
+    <string name="check_update_error">Gagal memeriksa pembaruan. Periksa koneksi internet Anda.</string>
 </resources>

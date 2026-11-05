@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import java.util.List;
 import id.my.sinanonym.stickerwa.BuildConfig;
 import id.my.sinanonym.stickerwa.R;
 import id.my.sinanonym.stickerwa.core.AppExecutors;
+import id.my.sinanonym.stickerwa.core.AppUpdateChecker;
 import id.my.sinanonym.stickerwa.core.LocalePreferences;
 import id.my.sinanonym.stickerwa.core.ThemePreferences;
 import id.my.sinanonym.stickerwa.data.StickerRepository;
@@ -98,6 +100,7 @@ public class SettingsActivity extends BaseActivity {
         bindPaletteControls();
         bindLanguageControls();
         populateBuildInfo();
+        bindUpdateChecker();
         bindDeveloperControls();
         bindCopyrightRow();
     }
@@ -106,6 +109,45 @@ public class SettingsActivity extends BaseActivity {
         View cardCopyright = findViewById(R.id.card_copyright_notice);
         if (cardCopyright != null) {
             cardCopyright.setOnClickListener(v -> startActivity(new Intent(this, CopyrightActivity.class)));
+        }
+    }
+
+    private void bindUpdateChecker() {
+        View btnCheckUpdate = findViewById(R.id.btn_check_update);
+        ProgressBar progressBar = findViewById(R.id.check_update_progress);
+        View chevronView = findViewById(R.id.check_update_chevron);
+
+        if (btnCheckUpdate != null) {
+            btnCheckUpdate.setOnClickListener(v -> {
+                if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
+                if (chevronView != null) chevronView.setVisibility(View.GONE);
+                btnCheckUpdate.setEnabled(false);
+
+                AppUpdateChecker.checkForUpdates(this, (updateInfo, errorMessage) -> {
+                    if (progressBar != null) progressBar.setVisibility(View.GONE);
+                    if (chevronView != null) chevronView.setVisibility(View.VISIBLE);
+                    btnCheckUpdate.setEnabled(true);
+
+                    if (updateInfo == null) {
+                        Toast.makeText(this, R.string.check_update_error, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (updateInfo.hasUpdate) {
+                        new androidx.appcompat.app.AlertDialog.Builder(this)
+                                .setTitle(getString(R.string.check_update_available_title, updateInfo.latestVersion))
+                                .setMessage(getString(R.string.check_update_available_msg, updateInfo.latestVersion, updateInfo.currentVersion))
+                                .setPositiveButton(R.string.check_update_btn_download, (dialog, which) -> {
+                                    String targetUrl = updateInfo.apkDownloadUrl != null ? updateInfo.apkDownloadUrl : updateInfo.htmlUrl;
+                                    safeOpenUrl(targetUrl);
+                                })
+                                .setNegativeButton(R.string.check_update_btn_later, null)
+                                .show();
+                    } else {
+                        Toast.makeText(this, getString(R.string.check_update_up_to_date, updateInfo.currentVersion), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            });
         }
     }
 

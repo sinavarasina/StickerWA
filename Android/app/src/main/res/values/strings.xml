@@ -149,4 +149,14 @@
     <!-- Copyright Body Texts -->
     <string name="copyright_community_text">Sticker packs and user contributions are provided for personal communication. If you are a copyright holder or representative thereof and wish to request removal of any sticker asset, please email us directly at sina@sinanonym.my.id with the relevant identification and details. Infringing content will be promptly reviewed and removed.</string>
     <string name="copyright_whatsapp_text">WhatsApp is a registered trademark of Meta Platforms, Inc. This application is an independent third-party tool and is not endorsed by, sponsored by, or directly affiliated with Meta Platforms, Inc. or WhatsApp.</string>
+    <!-- Update Checker Strings -->
+    <string name="check_update_title">Check for Updates</string>
+    <string name="check_update_subtitle">Tap to check the latest release on GitHub</string>
+    <string name="check_update_checking">Checking for updates…</string>
+    <string name="check_update_up_to_date">StickerWA is up to date (v%1$s)</string>
+    <string name="check_update_available_title">Update Available: v%1$s</string>
+    <string name="check_update_available_msg">A new version of StickerWA is available (v%1$s). Current version: v%2$s.\n\nWould you like to download it?</string>
+    <string name="check_update_btn_download">Download</string>
+    <string name="check_update_btn_later">Later</string>
+    <string name="check_update_error">Could not check for updates. Please check your internet connection.</string>
 </resources>

@@ -1,0 +1,178 @@
+name: Build & Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - custom
+      custom_version:
+        description: 'Custom version (e.g. 1.2.0, used only if bump is custom)'
+        required: false
+        default: ''
+      draft:
+        description: 'Create draft release'
+        required: false
+        type: boolean
+        default: false
+      prerelease:
+        description: 'Create pre-release'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Auto-determine version
+        id: versioning
+        run: |
+          LATEST_TAG=$(git tag -l "v*" --sort=-v:refname | head -n 1)
+          if [ -z "$LATEST_TAG" ]; then
+            LATEST_TAG="v1.0.0"
+          fi
+          echo "Latest tag: $LATEST_TAG"
+
+          CLEAN_VER="${LATEST_TAG#v}"
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CLEAN_VER"
+          MAJOR=${MAJOR:-1}
+          MINOR=${MINOR:-0}
+          PATCH=${PATCH:-0}
+
+          BUMP="${{ github.event.inputs.bump }}"
+          if [ "$BUMP" = "major" ]; then
+            NEW_MAJOR=$((MAJOR + 1))
+            NEW_VER="${NEW_MAJOR}.0.0"
+          elif [ "$BUMP" = "minor" ]; then
+            NEW_MINOR=$((MINOR + 1))
+            NEW_VER="${MAJOR}.${NEW_MINOR}.0"
+          elif [ "$BUMP" = "custom" ] && [ -n "${{ github.event.inputs.custom_version }}" ]; then
+            RAW_CUSTOM="${{ github.event.inputs.custom_version }}"
+            NEW_VER="${RAW_CUSTOM#v}"
+          else
+            NEW_PATCH=$((PATCH + 1))
+            NEW_VER="${MAJOR}.${MINOR}.${NEW_PATCH}"
+          fi
+
+          TOTAL_COMMITS=$(git rev-list --count HEAD)
+          VERSION_CODE=$((TOTAL_COMMITS + 1))
+          TAG_NAME="v${NEW_VER}"
+
+          echo "NEW_VERSION=${NEW_VER}" >> $GITHUB_ENV
+          echo "VERSION_CODE=${VERSION_CODE}" >> $GITHUB_ENV
+          echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_ENV
+
+          echo "Target version: ${NEW_VER} (code: ${VERSION_CODE}, tag: ${TAG_NAME})"
+
+      - name: Prepare signing keystore
+        id: keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          KEYSTORE_DIR="${RUNNER_TEMP}/keystore"
+          mkdir -p "$KEYSTORE_DIR"
+          KEYSTORE_FILE="${KEYSTORE_DIR}/release.keystore"
+
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 --decode > "$KEYSTORE_FILE"
+            echo "KEYSTORE_FILE=${KEYSTORE_FILE}" >> $GITHUB_ENV
+            echo "KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD:-android}" >> $GITHUB_ENV
+            echo "KEY_ALIAS=${KEY_ALIAS:-androiddebugkey}" >> $GITHUB_ENV
+            echo "KEY_PASSWORD=${KEY_PASSWORD:-android}" >> $GITHUB_ENV
+            echo "Using provided signed keystore secret."
+          else
+            echo "No KEYSTORE_BASE64 secret found. Generating standalone release keystore."
+            keytool -genkeypair -v \
+              -keystore "$KEYSTORE_FILE" \
+              -alias "stickerwa" \
+              -keyalg RSA \
+              -keysize 2048 \
+              -validity 10000 \
+              -storepass "stickerwa_release" \
+              -keypass "stickerwa_release" \
+              -dname "CN=StickerWA, OU=Mobile, O=StickerWA, L=Jakarta, ST=Jakarta, C=ID"
+            echo "KEYSTORE_FILE=${KEYSTORE_FILE}" >> $GITHUB_ENV
+            echo "KEYSTORE_PASSWORD=stickerwa_release" >> $GITHUB_ENV
+            echo "KEY_ALIAS=stickerwa" >> $GITHUB_ENV
+            echo "KEY_PASSWORD=stickerwa_release" >> $GITHUB_ENV
+          fi
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x Android/gradlew
+
+      - name: Build Signed Release APKs
+        run: |
+          ./Android/gradlew -p Android assembleRelease \
+            -PRELEASE_BUILD=true \
+            -PVERSION_NAME="${{ env.NEW_VERSION }}" \
+            -PVERSION_CODE="${{ env.VERSION_CODE }}" \
+            -PKEYSTORE_FILE="${{ env.KEYSTORE_FILE }}" \
+            -PKEYSTORE_PASSWORD="${{ env.KEYSTORE_PASSWORD }}" \
+            -PKEY_ALIAS="${{ env.KEY_ALIAS }}" \
+            -PKEY_PASSWORD="${{ env.KEY_PASSWORD }}" \
+            --no-configuration-cache \
+            --no-daemon
+
+      - name: Collect and package artifacts
+        run: |
+          DIST_DIR="release_dist"
+          mkdir -p "$DIST_DIR"
+          APK_SOURCE="Android/app/build/outputs/apk/release"
+
+          for apk in "$APK_SOURCE"/*.apk; do
+            if [ -f "$apk" ]; then
+              base=$(basename "$apk" .apk)
+              # Normalize name e.g. app-universal-release -> StickerWA-v1.0.1-universal.apk
+              variant="${base#app-}"
+              variant="${variant%-release}"
+              target_name="StickerWA-${{ env.TAG_NAME }}-${variant}.apk"
+              cp "$apk" "${DIST_DIR}/${target_name}"
+            fi
+          done
+
+          cd "$DIST_DIR"
+          sha256sum *.apk > sha256sums.txt
+          ls -lh
+          cd ..
+
+      - name: Tag and push git tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "${{ env.TAG_NAME }}" -m "Release ${{ env.TAG_NAME }}"
+          git push origin "${{ env.TAG_NAME }}"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          name: "StickerWA ${{ env.TAG_NAME }}"
+          draft: ${{ github.event.inputs.draft }}
+          prerelease: ${{ github.event.inputs.prerelease }}
+          generate_release_notes: true
+          files: release_dist/*
