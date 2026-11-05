@@ -28,21 +28,40 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
+            <!-- Separate Chips: Sticker Count & Pack File Size -->
             <TextView
-                android:id="@+id/sticker_pack_filesize"
+                android:id="@+id/sticker_pack_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/badge_pill"
                 android:fontFamily="sans-serif-medium"
-                android:paddingStart="10dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="4dp"
+                android:paddingStart="8dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="3dp"
                 android:singleLine="true"
                 android:textColor="?attr/colorBadgeText"
                 android:textSize="11sp"
                 android:textStyle="bold"
-                tools:text="3 • 152 KB" />
+                tools:text="3 Stiker" />
+
+            <TextView
+                android:id="@+id/sticker_pack_filesize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/badge_pill"
+                android:fontFamily="sans-serif-medium"
+                android:paddingStart="8dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="3dp"
+                android:singleLine="true"
+                android:textColor="?attr/colorBadgeText"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                tools:text="152 KB" />
 
             <ImageView
                 android:id="@+id/sticker_pack_animation_indicator"
@@ -54,6 +73,26 @@
                 android:src="@drawable/animated_pack_indicator"
                 android:visibility="gone"
                 app:tint="?attr/colorPrimary"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/sticker_pack_custom_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/badge_pill"
+                android:fontFamily="sans-serif-medium"
+                android:paddingStart="7dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="7dp"
+                android:paddingBottom="3dp"
+                android:singleLine="true"
+                android:text="@string/custom_pack_badge"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:visibility="gone"
                 tools:visibility="visible" />
 
             <Space
@@ -71,6 +110,18 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/sticker_3rdparty_add"
                 app:tint="?attr/colorAddButtonIcon" />
+
+            <ImageView
+                android:id="@+id/selection_check_indicator"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@drawable/btn_circle_tonal"
+                android:contentDescription="@null"
+                android:padding="6dp"
+                android:src="@drawable/ic_check_circle"
+                android:visibility="gone"
+                app:tint="?attr/colorPrimary"
+                tools:visibility="visible" />
 
         </LinearLayout>
 

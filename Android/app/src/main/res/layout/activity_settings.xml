@@ -28,381 +28,760 @@
     <ScrollView
         android:id="@+id/settings_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:clipToPadding="false"
+        android:fillViewport="true"
         android:paddingStart="16dp"
         android:paddingTop="12dp"
         android:paddingEnd="16dp"
-        android:paddingBottom="32dp">
+        android:paddingBottom="24dp"
+        android:scrollbars="none">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <!-- Card 1: Theme Mode Picker (Separated) -->
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
-            app:cardBackgroundColor="?attr/colorCardSurface"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="0dp">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <!-- Card 1: Theme Mode -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/settings_theme_mode_title"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <!-- Option: System -->
-                <LinearLayout
-                    android:id="@+id/option_mode_system"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_thumb_unselected"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/theme_mode_system"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        android:id="@+id/check_mode_system"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_check_circle"
-                        android:visibility="gone"
-                        app:tint="?attr/colorPrimary"
-                        tools:visibility="visible" />
-                </LinearLayout>
-
-                <!-- Option: Light -->
-                <LinearLayout
-                    android:id="@+id/option_mode_light"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_thumb_unselected"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/theme_mode_light"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        android:id="@+id/check_mode_light"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_check_circle"
-                        android:visibility="gone"
-                        app:tint="?attr/colorPrimary" />
-                </LinearLayout>
-
-                <!-- Option: Dark -->
-                <LinearLayout
-                    android:id="@+id/option_mode_dark"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_thumb_unselected"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/theme_mode_dark"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        android:id="@+id/check_mode_dark"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_check_circle"
-                        android:visibility="gone"
-                        app:tint="?attr/colorPrimary" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Card 2: Color Palette Picker (Separated) -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
-            app:cardBackgroundColor="?attr/colorCardSurface"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/settings_palette_title"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <!-- Option: Catppuccin -->
-                <LinearLayout
-                    android:id="@+id/option_palette_catppuccin"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_thumb_unselected"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/palette_catppuccin_label"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        android:id="@+id/check_palette_catppuccin"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_check_circle"
-                        android:visibility="gone"
-                        app:tint="?attr/colorPrimary"
-                        tools:visibility="visible" />
-                </LinearLayout>
-
-                <!-- Option: Gruvbox -->
-                <LinearLayout
-                    android:id="@+id/option_palette_gruvbox"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_thumb_unselected"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/palette_gruvbox_label"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        android:id="@+id/check_palette_gruvbox"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_check_circle"
-                        android:visibility="gone"
-                        app:tint="?attr/colorPrimary" />
-                </LinearLayout>
-
-                <!-- Option: Monet (Dynamic Color) -->
-                <LinearLayout
-                    android:id="@+id/option_palette_monet"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_thumb_unselected"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/palette_monet_label"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        android:id="@+id/check_palette_monet"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_check_circle"
-                        android:visibility="gone"
-                        app:tint="?attr/colorPrimary" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Card 3: Build Information -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="?attr/colorCardSurface"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="14dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/settings_build_info_title"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                android:layout_marginBottom="14dp"
+                app:cardBackgroundColor="?attr/colorCardSurface"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_preview_stage"
                     android:orientation="vertical"
-                    android:padding="14dp">
+                    android:padding="18dp">
 
                     <TextView
-                        android:id="@+id/build_info_version"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
+                        android:layout_marginBottom="12dp"
                         android:fontFamily="sans-serif-medium"
+                        android:text="@string/settings_theme_mode_title"
                         android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="13sp"
-                        tools:text="Versi: 1.0 (Code 1)" />
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/build_info_package"
+                    <!-- Option: System -->
+                    <LinearLayout
+                        android:id="@+id/option_mode_system"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:fontFamily="sans-serif"
-                        android:textColor="?android:attr/textColorSecondary"
-                        android:textSize="13sp"
-                        tools:text="Package: id.my.sinanonym.stickerwa" />
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_thumb_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
 
-                    <TextView
-                        android:id="@+id/build_info_type"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:fontFamily="sans-serif"
-                        android:textColor="?android:attr/textColorSecondary"
-                        android:textSize="13sp"
-                        tools:text="Tipe Build: release" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/theme_mode_system"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="14sp" />
 
-                    <TextView
-                        android:id="@+id/build_info_time"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:fontFamily="sans-serif"
-                        android:textColor="?android:attr/textColorSecondary"
-                        android:textSize="13sp"
-                        tools:text="Waktu Build: 2026-11-06 03:00:00" />
+                        <ImageView
+                            android:id="@+id/check_mode_system"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_check_circle"
+                            android:visibility="gone"
+                            app:tint="?attr/colorPrimary" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/build_info_arch"
+                    <!-- Option: Light -->
+                    <LinearLayout
+                        android:id="@+id/option_mode_light"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:fontFamily="sans-serif"
-                        android:textColor="?android:attr/textColorSecondary"
-                        android:textSize="13sp"
-                        tools:text="Arsitektur (ABI): arm64-v8a" />
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_thumb_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
 
-                    <TextView
-                        android:id="@+id/build_info_sdk"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:fontFamily="sans-serif"
-                        android:textColor="?android:attr/textColorSecondary"
-                        android:textSize="13sp"
-                        tools:text="Android SDK: API 35 (Android 15)" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/theme_mode_light"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="14sp" />
 
-                    <TextView
-                        android:id="@+id/build_info_packs"
+                        <ImageView
+                            android:id="@+id/check_mode_light"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_check_circle"
+                            android:visibility="gone"
+                            app:tint="?attr/colorPrimary" />
+                    </LinearLayout>
+
+                    <!-- Option: Dark -->
+                    <LinearLayout
+                        android:id="@+id/option_mode_dark"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:textColor="?attr/colorPrimary"
-                        android:textSize="13sp"
-                        tools:text="Total Koleksi: 6 Pack (12 Stiker)" />
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_thumb_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/theme_mode_dark"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/check_mode_dark"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_check_circle"
+                            android:visibility="gone"
+                            app:tint="?attr/colorPrimary" />
+                    </LinearLayout>
 
                 </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+            <!-- Card 2: Color Palette -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                app:cardBackgroundColor="?attr/colorCardSurface"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
 
-    </LinearLayout>
-</ScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/settings_palette_title"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <!-- Option: Catppuccin -->
+                    <LinearLayout
+                        android:id="@+id/option_palette_catppuccin"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_thumb_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/palette_catppuccin_label"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/check_palette_catppuccin"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_check_circle"
+                            android:visibility="gone"
+                            app:tint="?attr/colorPrimary" />
+                    </LinearLayout>
+
+                    <!-- Option: Gruvbox -->
+                    <LinearLayout
+                        android:id="@+id/option_palette_gruvbox"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_thumb_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/palette_gruvbox_label"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/check_palette_gruvbox"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_check_circle"
+                            android:visibility="gone"
+                            app:tint="?attr/colorPrimary" />
+                    </LinearLayout>
+
+                    <!-- Option: Monet (Dynamic Color) -->
+                    <LinearLayout
+                        android:id="@+id/option_palette_monet"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_thumb_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/palette_monet_label"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/check_palette_monet"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_check_circle"
+                            android:visibility="gone"
+                            app:tint="?attr/colorPrimary" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card 3: Language Settings -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                app:cardBackgroundColor="?attr/colorCardSurface"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/settings_language_title"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <!-- Option: Follow System -->
+                    <LinearLayout
+                        android:id="@+id/option_lang_system"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_thumb_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/language_system"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/check_lang_system"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_check_circle"
+                            android:visibility="gone"
+                            app:tint="?attr/colorPrimary" />
+                    </LinearLayout>
+
+                    <!-- Option: English -->
+                    <LinearLayout
+                        android:id="@+id/option_lang_en"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_thumb_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/language_english"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/check_lang_en"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_check_circle"
+                            android:visibility="gone"
+                            app:tint="?attr/colorPrimary" />
+                    </LinearLayout>
+
+                    <!-- Option: Bahasa Indonesia -->
+                    <LinearLayout
+                        android:id="@+id/option_lang_in"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_thumb_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/language_indonesian"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/check_lang_in"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_check_circle"
+                            android:visibility="gone"
+                            app:tint="?attr/colorPrimary" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card 4: Build Information -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                app:cardBackgroundColor="?attr/colorCardSurface"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="14dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/settings_build_info_title"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_preview_stage"
+                        android:orientation="vertical"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:id="@+id/build_info_version"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="13sp"
+                            tools:text="Versi: 1.0 (Code 1)" />
+
+                        <TextView
+                            android:id="@+id/build_info_package"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="13sp"
+                            tools:text="Package: id.my.sinanonym.stickerwa" />
+
+                        <TextView
+                            android:id="@+id/build_info_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="13sp"
+                            tools:text="Tipe Build: release" />
+
+                        <TextView
+                            android:id="@+id/build_info_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="13sp"
+                            tools:text="Waktu Build: 2026-11-06 03:00:00" />
+
+                        <TextView
+                            android:id="@+id/build_info_commit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="13sp"
+                            tools:text="Git Commit: 64b67ca (main)" />
+
+                        <TextView
+                            android:id="@+id/build_info_arch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="13sp"
+                            tools:text="Arsitektur (ABI): arm64-v8a" />
+
+                        <TextView
+                            android:id="@+id/build_info_sdk"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="13sp"
+                            tools:text="Android SDK: API 35 (Android 15)" />
+
+                        <TextView
+                            android:id="@+id/build_info_packs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="13sp"
+                            tools:text="Total Koleksi: 6 Pack (12 Stiker)" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card 5: About Developer -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                app:cardBackgroundColor="?attr/colorCardSurface"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="14dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/settings_developer_title"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <!-- Developer Identity: Avatar + Names -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:contentDescription="@string/developer_name"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_developer_avatar"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearance.App.Circle" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/developer_name"
+                                android:textColor="?android:attr/textColorPrimary"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="1dp"
+                                android:fontFamily="sans-serif"
+                                android:text="@string/developer_handle"
+                                android:textColor="?attr/colorPrimary"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="sans-serif"
+                                android:text="@string/developer_bio"
+                                android:textColor="?android:attr/textColorSecondary"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Social & Contact Action Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!-- GitHub Button -->
+                        <FrameLayout
+                            android:id="@+id/btn_dev_github"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/btn_rounded_tonal"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:contentDescription="@string/developer_github">
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_github"
+                                app:tint="?android:attr/textColorPrimary" />
+                        </FrameLayout>
+
+                        <!-- Codeberg Button -->
+                        <FrameLayout
+                            android:id="@+id/btn_dev_codeberg"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/btn_rounded_tonal"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:contentDescription="@string/developer_codeberg">
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_codeberg" />
+                        </FrameLayout>
+
+                        <!-- GitLab Button -->
+                        <FrameLayout
+                            android:id="@+id/btn_dev_gitlab"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/btn_rounded_tonal"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:contentDescription="@string/developer_gitlab">
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_gitlab" />
+                        </FrameLayout>
+
+                        <!-- Email Button -->
+                        <FrameLayout
+                            android:id="@+id/btn_dev_email"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/btn_rounded_tonal"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:contentDescription="@string/developer_email_label">
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_email"
+                                app:tint="?android:attr/textColorPrimary" />
+                        </FrameLayout>
+
+                        <!-- Website Button -->
+                        <FrameLayout
+                            android:id="@+id/btn_dev_website"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/btn_rounded_tonal"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:contentDescription="@string/developer_website_label">
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_web"
+                                app:tint="?android:attr/textColorPrimary" />
+                        </FrameLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card 6: Copyright Notice (Clickable link to dedicated screen) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_copyright_notice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="?attr/colorCardSurface"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="18dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/settings_copyright_notice_title"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/settings_copyright_notice_subtitle"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_chevron_right"
+                        app:tint="?android:attr/textColorSecondary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

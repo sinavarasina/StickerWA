@@ -93,8 +93,9 @@ public class StickerPackFloatingDialogFragment extends DialogFragment {
         Window window = dialog.getWindow();
         if (window != null) {
             window.requestFeature(Window.FEATURE_NO_TITLE);
-            // Flat UI: remove semi-transparent window dimming
-            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            // Enable background dimming when floating card is displayed
+            window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            window.setDimAmount(0.6f);
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 WindowManager.LayoutParams lp = window.getAttributes();
@@ -146,6 +147,7 @@ public class StickerPackFloatingDialogFragment extends DialogFragment {
         packSubtitle.setText(getString(R.string.floating_card_subtitle_format, stickerPack.publisher, count, formattedSize));
 
         closeButton.setOnClickListener(v -> dismiss());
+
         infoButton.setOnClickListener(v -> {
             Intent intent = new Intent(requireContext(), StickerPackInfoActivity.class);
             intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_ID, stickerPack.identifier);

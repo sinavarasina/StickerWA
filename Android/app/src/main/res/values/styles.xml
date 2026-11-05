@@ -158,4 +158,8 @@
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
+    <style name="ShapeAppearance.App.Circle" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

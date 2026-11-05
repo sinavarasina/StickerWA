@@ -21,17 +21,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
 import androidx.fragment.app.DialogFragment;
 
+import id.my.sinanonym.stickerwa.core.LocalePreferences;
 import id.my.sinanonym.stickerwa.core.ThemePreferences;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
     private String appliedPalette;
     private String appliedMode;
+    private String appliedLocale;
+
+    @Override
+    protected void attachBaseContext(android.content.Context newBase) {
+        super.attachBaseContext(LocalePreferences.wrapContext(newBase));
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         appliedPalette = ThemePreferences.getPalette(this);
         appliedMode = ThemePreferences.getThemeMode(this);
+        appliedLocale = LocalePreferences.getLocale(this);
         ThemePreferences.applyTheme(this);
         super.onCreate(savedInstanceState);
 
@@ -53,8 +61,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onResume();
         String currentPalette = ThemePreferences.getPalette(this);
         String currentMode = ThemePreferences.getThemeMode(this);
+        String currentLocale = LocalePreferences.getLocale(this);
         if ((appliedPalette != null && !appliedPalette.equals(currentPalette))
-                || (appliedMode != null && !appliedMode.equals(currentMode))) {
+                || (appliedMode != null && !appliedMode.equals(currentMode))
+                || (appliedLocale != null && !appliedLocale.equals(currentLocale))) {
             recreate();
         }
     }

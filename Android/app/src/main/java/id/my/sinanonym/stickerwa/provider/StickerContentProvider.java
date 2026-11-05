@@ -24,6 +24,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import java.util.Objects;
 
 import id.my.sinanonym.stickerwa.BuildConfig;
 import id.my.sinanonym.stickerwa.data.ContentFileParser;
+import id.my.sinanonym.stickerwa.data.UserStickerPackManager;
 import id.my.sinanonym.stickerwa.data.model.Sticker;
 import id.my.sinanonym.stickerwa.data.model.StickerPack;
 
@@ -81,8 +83,6 @@ public class StickerContentProvider extends ContentProvider {
     private static final int STICKERS_ASSET_CODE = 4;
     private static final int STICKER_PACK_TRAY_ICON_CODE = 5;
 
-    private List<StickerPack> stickerPackList;
-
     @Override
     public boolean onCreate() {
         final String authority = BuildConfig.CONTENT_PROVIDER_AUTHORITY;
@@ -98,6 +98,9 @@ public class StickerContentProvider extends ContentProvider {
 
         // Gets the list of stickers for a sticker pack, * represent the identifier.
         MATCHER.addURI(authority, STICKERS + "/*", STICKERS_CODE);
+
+        // Wildcard fallback for all sticker and tray assets
+        MATCHER.addURI(authority, STICKERS_ASSET + "/*/*", STICKERS_ASSET_CODE);
 
         for (StickerPack stickerPack : getStickerPackList()) {
             MATCHER.addURI(authority, STICKERS_ASSET + "/" + stickerPack.identifier + "/" + stickerPack.trayImageFile, STICKER_PACK_TRAY_ICON_CODE);
@@ -153,19 +156,27 @@ public class StickerContentProvider extends ContentProvider {
         }
     }
 
+    private List<StickerPack> builtInPacks;
+
     private synchronized void readContentFile(@NonNull Context context) {
         try (InputStream contentsInputStream = context.getAssets().open(CONTENT_FILE_NAME)) {
-            stickerPackList = ContentFileParser.parseStickerPacks(contentsInputStream);
+            builtInPacks = ContentFileParser.parseStickerPacks(contentsInputStream);
         } catch (IOException | IllegalStateException e) {
             throw new RuntimeException(CONTENT_FILE_NAME + " file has some issues: " + e.getMessage(), e);
         }
     }
 
     private List<StickerPack> getStickerPackList() {
-        if (stickerPackList == null) {
-            readContentFile(Objects.requireNonNull(getContext()));
+        Context context = Objects.requireNonNull(getContext());
+        if (builtInPacks == null) {
+            readContentFile(context);
         }
-        return stickerPackList;
+        List<StickerPack> combined = new ArrayList<>();
+        if (builtInPacks != null) {
+            combined.addAll(builtInPacks);
+        }
+        combined.addAll(UserStickerPackManager.loadUserPacks(context));
+        return combined;
     }
 
     private Cursor getPackForAllStickerPacks(@NonNull Uri uri) {
@@ -268,10 +279,21 @@ public class StickerContentProvider extends ContentProvider {
     }
 
     private AssetFileDescriptor fetchFile(@NonNull Uri uri, @NonNull AssetManager am, @NonNull String fileName, @NonNull String identifier) {
+        Context context = Objects.requireNonNull(getContext());
+        File customFile = UserStickerPackManager.getCustomStickerFile(context, identifier, fileName);
+        if (customFile.exists()) {
+            try {
+                android.os.ParcelFileDescriptor pfd = android.os.ParcelFileDescriptor.open(customFile, android.os.ParcelFileDescriptor.MODE_READ_ONLY);
+                return new AssetFileDescriptor(pfd, 0, AssetFileDescriptor.UNKNOWN_LENGTH);
+            } catch (IOException e) {
+                Log.e(context.getPackageName(), "IOException when opening custom sticker file, uri:" + uri, e);
+                return null;
+            }
+        }
         try {
             return am.openFd(identifier + "/" + fileName);
         } catch (IOException e) {
-            Log.e(Objects.requireNonNull(getContext()).getPackageName(), "IOException when getting asset file, uri:" + uri, e);
+            Log.e(context.getPackageName(), "IOException when getting asset file, uri:" + uri, e);
             return null;
         }
     }

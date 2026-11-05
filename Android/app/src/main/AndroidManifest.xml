@@ -51,6 +51,25 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="id.my.sinanonym.stickerwa.ui.list.StickerPackListActivity" />
         </activity>
+        <activity
+            android:name=".ui.settings.CopyrightActivity"
+            android:label="@string/copyright_screen_title"
+            android:parentActivityName=".ui.settings.SettingsActivity"
+            tools:ignore="UnusedAttribute">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="id.my.sinanonym.stickerwa.ui.settings.SettingsActivity" />
+        </activity>
+        <activity
+            android:name=".ui.create.CreateStickerPackActivity"
+            android:label="@string/title_create_sticker_pack"
+            android:parentActivityName=".ui.list.StickerPackListActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            tools:ignore="UnusedAttribute">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="id.my.sinanonym.stickerwa.ui.list.StickerPackListActivity" />
+        </activity>
 
         <provider
             android:name=".provider.StickerContentProvider"
@@ -58,6 +77,16 @@
             android:enabled="true"
             android:exported="true"
             android:readPermission="com.whatsapp.sticker.READ" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
     </application>
 
     <!-- to be able to query the whitelist status in WhatsApp 

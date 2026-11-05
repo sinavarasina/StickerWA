@@ -31,6 +31,7 @@ public class StickerPack implements Parcelable {
     private List<Sticker> stickers;
     private long totalSize;
     private boolean isWhitelisted;
+    private boolean isCustom;
 
     public StickerPack(
             String identifier,
@@ -65,6 +66,14 @@ public class StickerPack implements Parcelable {
         return isWhitelisted;
     }
 
+    public void setIsCustom(boolean isCustom) {
+        this.isCustom = isCustom;
+    }
+
+    public boolean isCustom() {
+        return isCustom || (identifier != null && identifier.startsWith("custom_"));
+    }
+
     protected StickerPack(Parcel in) {
         identifier = in.readString();
         name = in.readString();
@@ -82,6 +91,7 @@ public class StickerPack implements Parcelable {
         imageDataVersion = in.readString();
         avoidCache = in.readByte() != 0;
         animatedStickerPack = in.readByte() != 0;
+        isCustom = in.readByte() != 0;
     }
 
     public static final Creator<StickerPack> CREATOR = new Creator<StickerPack>() {
@@ -143,5 +153,6 @@ public class StickerPack implements Parcelable {
         dest.writeString(imageDataVersion);
         dest.writeByte((byte) (avoidCache ? 1 : 0));
         dest.writeByte((byte) (animatedStickerPack ? 1 : 0));
+        dest.writeByte((byte) (isCustom ? 1 : 0));
     }
 }

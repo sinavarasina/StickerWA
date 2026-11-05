@@ -58,4 +58,95 @@
     <string name="build_info_arch_format">Architecture (ABI): %1$s</string>
     <string name="build_info_sdk_format">Android SDK: API %1$d (Android %2$s)</string>
     <string name="build_info_packs_format">Sticker Collection: %1$d Packs (%2$d Stickers)</string>
+
+    <!-- Developer & Disclaimer Strings -->
+    <string name="settings_developer_title">About Developer</string>
+    <string name="developer_name" translatable="false">sinanonym</string>
+    <string name="developer_handle" translatable="false">@sinavarasina</string>
+    <string name="developer_bio">Open-source enthusiast, passionate builder, and author of StickerWA.</string>
+    <string name="developer_github" translatable="false">GitHub</string>
+    <string name="developer_codeberg" translatable="false">Codeberg</string>
+    <string name="developer_gitlab" translatable="false">GitLab</string>
+    <string name="developer_email_label">Email</string>
+    <string name="developer_website_label">Website</string>
+
+    <string name="settings_disclaimer_title">Copyright Notice &amp; Disclaimer</string>
+    <string name="disclaimer_character_text">The character featured in the application logo is Rias Gremory from the anime &amp; light novel series \"High School DxD\" (Created by Ichiei Ishibumi, Illustrated by Miyama-Zero, Published by Fujimi Shobo / KADOKAWA, Animated by TNK / Passione).</string>
+    <string name="disclaimer_legal_text">StickerWA is a 100% free, non-commercial, non-profit fan-made application created solely for entertainment and personal educational use. This application is NOT affiliated with, authorized, maintained, sponsored, or endorsed by the original authors, publishers, or copyright holders. All trademarks, characters, and copyrights belong to their respective owners.</string>
+
+    <!-- Create Custom Pack & Submission Strings -->
+    <string name="action_create_pack">Create Sticker Pack</string>
+    <string name="title_create_sticker_pack">Create Sticker Pack</string>
+    <string name="create_pack_name_hint">Pack Name (e.g. My Stickers)</string>
+    <string name="create_pack_publisher_hint">Author / Publisher Name</string>
+    <string name="create_pack_email_hint">Author Email (For git patch submission)</string>
+    <string name="create_pack_website_hint">Website (Optional)</string>
+    <string name="create_pack_tray_title">Tray Icon</string>
+    <string name="create_pack_tray_subtitle">Tap to pick icon (96x96 px)</string>
+    <string name="create_pack_stickers_title">Stickers</string>
+    <string name="create_pack_stickers_count_format">%1$d / 30 stickers (min. 1)</string>
+    <string name="create_pack_add_stickers">Add Stickers</string>
+    <string name="create_pack_btn_save">Create Pack</string>
+    <string name="create_pack_converting">Converting and preparing stickers…</string>
+    <string name="create_pack_error_name">Please enter a pack name</string>
+    <string name="create_pack_error_publisher">Please enter author/publisher name</string>
+    <string name="create_pack_error_tray">Please select a tray icon</string>
+    <string name="create_pack_error_min_stickers">At least 1 sticker is required</string>
+    <string name="create_pack_error_max_stickers">A sticker pack cannot exceed 30 stickers</string>
+    <string name="submit_to_author_button">Submit to Author</string>
+    <string name="submit_to_author_title">Submit Pack to Author</string>
+    <string name="submit_to_author_confirm_msg">This will generate a git patch bundle with your name &amp; email as author, and launch your email client to send it to sina@sinanonym.my.id.</string>
+    <string name="submit_to_author_email_subject">[StickerWA Pack Submission] %1$s</string>
+    <string name="custom_pack_badge">CUSTOM</string>
+    <string name="delete_pack_button">Delete Pack</string>
+    <string name="delete_pack_confirm">Are you sure you want to delete this custom pack from your device?</string>
+
+    <!-- Git Commit & Selection Mode & Copyright Strings -->
+    <string name="build_info_commit_format">Git Commit: %1$s (%2$s)</string>
+    <string name="selection_count_format">%1$d Selected</string>
+    <string name="batch_submit_title">Submit Packs to Author</string>
+    <string name="batch_submit_confirm">This will package %1$d selected sticker pack(s) as git patches and launch your email client to submit them to sina@sinanonym.my.id.</string>
+    <string name="batch_delete_title">Delete Selected Packs</string>
+    <string name="batch_delete_confirm">Are you sure you want to delete %1$d selected custom sticker pack(s) from your device?</string>
+    <string name="batch_delete_success">Deleted %1$d sticker pack(s)</string>
+    <string name="settings_copyright_notice_title">Copyright Notice</string>
+    <string name="settings_copyright_notice_subtitle">Copyright notice see detail →</string>
+    <string name="copyright_screen_title">Copyright Notice</string>
+    <string name="copyright_character_title">Character Art &amp; App Logo</string>
+    <string name="copyright_character_subtitle">Rias Gremory (High School DxD)</string>
+    <string name="copyright_fair_use_title">Non-Commercial Fair Use</string>
+    <string name="copyright_fair_use_subtitle">Open Source &amp; Free Hobby Project</string>
+    <string name="copyright_community_title">Community Submissions &amp; Takedown</string>
+    <string name="copyright_community_subtitle">IP Holder Inquiries &amp; Attribution</string>
+    <string name="copyright_whatsapp_title">WhatsApp Trademark Notice</string>
+    <string name="copyright_whatsapp_subtitle">Third-Party Independent Application</string>
+    <string name="select_custom_only_notice">Only custom packs can be selected for submission or deletion</string>
+    <!-- Plurals for Separate Count Chip -->
+    <plurals name="card_sticker_count_plural">
+        <item quantity="one">%1$d Sticker</item>
+        <item quantity="other">%1$d Stickers</item>
+    </plurals>
+    <string name="card_badge_size_format">%1$s</string>
+
+    <!-- Language Settings Strings -->
+    <string name="settings_language_title">Language</string>
+    <string name="language_system">Follow System (Default)</string>
+    <string name="language_english">English</string>
+    <string name="language_indonesian">Bahasa Indonesia</string>
+
+    <!-- Section Titles & Common Dialog Actions -->
+    <string name="create_pack_section_info">Pack Information</string>
+    <string name="dialog_btn_submit">Submit</string>
+    <string name="dialog_btn_delete">Delete</string>
+
+    <!-- Toasts & Error Messages -->
+    <string name="error_no_browser">No browser found to open link.</string>
+    <string name="error_no_email_app">No email app found.</string>
+    <string name="create_pack_success_toast">Sticker pack \'%1$s\' created!</string>
+    <string name="submission_error_toast">Error creating submission email: %1$s</string>
+    <string name="batch_submission_error_toast">Error creating batch submission email: %1$s</string>
+
+    <!-- Copyright Body Texts -->
+    <string name="copyright_community_text">Sticker packs and user contributions are provided for personal communication. If you are a copyright holder or representative thereof and wish to request removal of any sticker asset, please email us directly at sina@sinanonym.my.id with the relevant identification and details. Infringing content will be promptly reviewed and removed.</string>
+    <string name="copyright_whatsapp_text">WhatsApp is a registered trademark of Meta Platforms, Inc. This application is an independent third-party tool and is not endorsed by, sponsored by, or directly affiliated with Meta Platforms, Inc. or WhatsApp.</string>
 </resources>

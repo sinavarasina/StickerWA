@@ -54,6 +54,10 @@ public final class StickerRepository {
 
     private StickerRepository() {}
 
+    public static synchronized void clearCache() {
+        cachedStickerPacks = null;
+    }
+
     /**
      * Fetches and validates sticker packs from the content provider, caching them in memory.
      */
@@ -80,6 +84,7 @@ public final class StickerRepository {
             throw new IllegalStateException("There should be at least one sticker pack in the app");
         }
         for (StickerPack stickerPack : stickerPackList) {
+            stickerPack.setIsCustom(UserStickerPackManager.isUserPack(context, stickerPack.identifier));
             final List<Sticker> stickers = getStickersForPack(context, stickerPack);
             stickerPack.setStickers(stickers);
             StickerPackValidator.verifyStickerPackValidity(context, stickerPack);

@@ -1,9 +1,13 @@
 package id.my.sinanonym.stickerwa.ui.settings;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -16,6 +20,7 @@ import java.util.List;
 import id.my.sinanonym.stickerwa.BuildConfig;
 import id.my.sinanonym.stickerwa.R;
 import id.my.sinanonym.stickerwa.core.AppExecutors;
+import id.my.sinanonym.stickerwa.core.LocalePreferences;
 import id.my.sinanonym.stickerwa.core.ThemePreferences;
 import id.my.sinanonym.stickerwa.data.StickerRepository;
 import id.my.sinanonym.stickerwa.data.model.StickerPack;
@@ -40,6 +45,13 @@ public class SettingsActivity extends BaseActivity {
     private View checkPaletteCatppuccin;
     private View checkPaletteGruvbox;
     private View checkPaletteMonet;
+
+    private View optionLangSystem;
+    private View optionLangEn;
+    private View optionLangIn;
+    private View checkLangSystem;
+    private View checkLangEn;
+    private View checkLangIn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,7 +96,17 @@ public class SettingsActivity extends BaseActivity {
 
         bindThemeModeControls();
         bindPaletteControls();
+        bindLanguageControls();
         populateBuildInfo();
+        bindDeveloperControls();
+        bindCopyrightRow();
+    }
+
+    private void bindCopyrightRow() {
+        View cardCopyright = findViewById(R.id.card_copyright_notice);
+        if (cardCopyright != null) {
+            cardCopyright.setOnClickListener(v -> startActivity(new Intent(this, CopyrightActivity.class)));
+        }
     }
 
     private void bindThemeModeControls() {
@@ -161,11 +183,53 @@ public class SettingsActivity extends BaseActivity {
         checkPaletteMonet.setVisibility(isMonet ? View.VISIBLE : View.GONE);
     }
 
+    private void bindLanguageControls() {
+        optionLangSystem = findViewById(R.id.option_lang_system);
+        optionLangEn = findViewById(R.id.option_lang_en);
+        optionLangIn = findViewById(R.id.option_lang_in);
+        checkLangSystem = findViewById(R.id.check_lang_system);
+        checkLangEn = findViewById(R.id.check_lang_en);
+        checkLangIn = findViewById(R.id.check_lang_in);
+
+        if (optionLangSystem != null) {
+            updateLanguageSelectionUI(LocalePreferences.getLocale(this));
+
+            optionLangSystem.setOnClickListener(v -> applyNewLocale(LocalePreferences.LOCALE_SYSTEM));
+            optionLangEn.setOnClickListener(v -> applyNewLocale(LocalePreferences.LOCALE_EN));
+            optionLangIn.setOnClickListener(v -> applyNewLocale(LocalePreferences.LOCALE_IN));
+        }
+    }
+
+    private void applyNewLocale(String newLocale) {
+        String current = LocalePreferences.getLocale(this);
+        if (!current.equals(newLocale)) {
+            LocalePreferences.setLocale(this, newLocale);
+            recreate();
+        }
+    }
+
+    private void updateLanguageSelectionUI(String localeCode) {
+        boolean isSystem = LocalePreferences.LOCALE_SYSTEM.equals(localeCode);
+        boolean isEn = LocalePreferences.LOCALE_EN.equals(localeCode);
+        boolean isIn = LocalePreferences.LOCALE_IN.equals(localeCode);
+
+        if (optionLangSystem != null) {
+            optionLangSystem.setBackgroundResource(isSystem ? R.drawable.bg_thumb_selected : R.drawable.bg_thumb_unselected);
+            optionLangEn.setBackgroundResource(isEn ? R.drawable.bg_thumb_selected : R.drawable.bg_thumb_unselected);
+            optionLangIn.setBackgroundResource(isIn ? R.drawable.bg_thumb_selected : R.drawable.bg_thumb_unselected);
+
+            checkLangSystem.setVisibility(isSystem ? View.VISIBLE : View.GONE);
+            checkLangEn.setVisibility(isEn ? View.VISIBLE : View.GONE);
+            checkLangIn.setVisibility(isIn ? View.VISIBLE : View.GONE);
+        }
+    }
+
     private void populateBuildInfo() {
         TextView versionView = findViewById(R.id.build_info_version);
         TextView packageView = findViewById(R.id.build_info_package);
         TextView typeView = findViewById(R.id.build_info_type);
         TextView timeView = findViewById(R.id.build_info_time);
+        TextView commitView = findViewById(R.id.build_info_commit);
         TextView archView = findViewById(R.id.build_info_arch);
         TextView sdkView = findViewById(R.id.build_info_sdk);
         TextView packsView = findViewById(R.id.build_info_packs);
@@ -174,6 +238,9 @@ public class SettingsActivity extends BaseActivity {
         packageView.setText(getString(R.string.build_info_package_format, BuildConfig.APPLICATION_ID));
         typeView.setText(getString(R.string.build_info_type_format, BuildConfig.BUILD_TYPE.toUpperCase()));
         timeView.setText(getString(R.string.build_info_time_format, BuildConfig.BUILD_TIME));
+        if (commitView != null) {
+            commitView.setText(getString(R.string.build_info_commit_format, BuildConfig.GIT_COMMIT, BuildConfig.GIT_BRANCH));
+        }
 
         String primaryAbi = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && Build.SUPPORTED_ABIS.length > 0)
                 ? Build.SUPPORTED_ABIS[0]
@@ -195,5 +262,48 @@ public class SettingsActivity extends BaseActivity {
                     packsView.setText(getString(R.string.build_info_packs_format, totalPacks, totalStickers));
                 }
         );
+    }
+
+    private void bindDeveloperControls() {
+        View btnGithub = findViewById(R.id.btn_dev_github);
+        View btnCodeberg = findViewById(R.id.btn_dev_codeberg);
+        View btnGitlab = findViewById(R.id.btn_dev_gitlab);
+        View btnEmail = findViewById(R.id.btn_dev_email);
+        View btnWebsite = findViewById(R.id.btn_dev_website);
+
+        if (btnGithub != null) {
+            btnGithub.setOnClickListener(v -> safeOpenUrl("https://github.com/sinavarasina"));
+        }
+        if (btnCodeberg != null) {
+            btnCodeberg.setOnClickListener(v -> safeOpenUrl("https://codeberg.org/sinavarasina"));
+        }
+        if (btnGitlab != null) {
+            btnGitlab.setOnClickListener(v -> safeOpenUrl("https://gitlab.com/sinanonym"));
+        }
+        if (btnEmail != null) {
+            btnEmail.setOnClickListener(v -> safeSendEmail("sina@sinanonym.my.id"));
+        }
+        if (btnWebsite != null) {
+            btnWebsite.setOnClickListener(v -> safeOpenUrl("https://sinanonym.my.id"));
+        }
+    }
+
+    private void safeOpenUrl(String url) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, R.string.error_no_browser, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void safeSendEmail(String email) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:" + email));
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, R.string.error_no_email_app, Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">StickerWA</string>
     <string name="title_main_screen">Sticker WA</string>
-    <string name="tray_image_content_description">Gambar Baki Paket Stiker</string>
+    <string name="tray_image_content_description">Ikon Tray Paket Stiker</string>
     <string name="more_info_button">Info selengkapnya tentang paket stiker</string>
     <string name="add_to_whatsapp">Tambah ke WhatsApp</string>
     <string name="add_button_content_description">Tambah paket stiker ke WhatsApp</string>
-    <string name="title_activity_sticker_pack_details_multiple_pack">Detail stiker</string>
+    <plurals name="title_activity_sticker_packs_list">
+        <item quantity="other">Paket Stiker</item>
+    </plurals>
+    <string name="title_activity_sticker_pack_details_multiple_pack">Detail Stiker</string>
     <string name="title_activity_sticker_pack_info">Info</string>
     <string name="view_webpage">Lihat halaman web</string>
     <string name="send_email">Kirim email</string>
-    <string name="privacy_policy">Kebijakan privasi</string>
-    <string name="info_screen_tray_icon">Ikon baki</string>
+    <string name="privacy_policy">Kebijakan Privasi</string>
+    <string name="license_agreement">Perjanjian Lisensi</string>
+    <string name="info_screen_tray_icon">Ikon Tray</string>
     <string name="details_pack_already_added">Terpasang</string>
     <string name="info_send_email_to_prompt">Kirim email dengan</string>
     <string name="add_pack_fail_prompt_update_whatsapp">Paket stiker belum ditambahkan. Jika ingin menambah, pastikan Anda memperbarui ke versi WhatsApp terbaru.</string>
     <string name="add_pack_fail_prompt_update_play_link">Perbarui</string>
     <string name="cannot_find_play_store">Google Play tidak terpasang di perangkat.</string>
-    <string name="license_agreement">Perjanjian lisensi</string>
-    <plurals name="title_activity_sticker_packs_list">
-        <item quantity="other">Paket Stiker</item>
-    </plurals>
     <string name="sticker_pack_animation_indicator">Paket stiker animasi</string>
     <string name="sticker_pack_details_tap_to_preview">Ketuk untuk melihat pratinjau stiker</string>
     <string name="action_theme">Tema &amp; Palet</string>
-    <string name="theme_dialog_title">Pilih Tema &amp; Palet</string>
+    <string name="theme_dialog_title">Tema &amp; Palet</string>
     <string name="badge_animated">ANIMASI</string>
 
     <!-- Portrait Card & Floating Card Strings -->
+    <string name="card_badge_count_size_format" translatable="false">%1$d • %2$s</string>
+    <plurals name="card_sticker_count_plural">
+        <item quantity="other">%1$d Stiker</item>
+    </plurals>
+    <string name="card_badge_size_format">%1$s</string>
+
     <string name="floating_card_subtitle_format">%1$s • %2$d Stiker • %3$s</string>
     <string name="save_sticker_button">Simpan</string>
     <string name="add_pack_short_button">WhatsApp</string>
-    <string name="sticker_saved_success">Stiker disimpan ke %1$s</string>
+    <string name="sticker_saved_success">Stiker berhasil disimpan ke %1$s</string>
     <string name="sticker_saved_failed">Gagal menyimpan stiker: %1$s</string>
 
     <!-- Settings Screen Strings -->
@@ -43,6 +50,15 @@
 
     <string name="settings_palette_title">Palet Warna</string>
     <string name="settings_palette_subtitle">Pilih palet warna flat untuk antarmuka aplikasi</string>
+    <string name="palette_catppuccin_label" translatable="false">Catppuccin (Latte / Mocha)</string>
+    <string name="palette_gruvbox_label" translatable="false">Gruvbox (Light / Dark)</string>
+    <string name="palette_monet_label" translatable="false">Monet (Dynamic Color)</string>
+
+    <string name="settings_language_title">Bahasa</string>
+    <string name="language_system">Ikuti Sistem (Default)</string>
+    <string name="language_english">English</string>
+    <string name="language_indonesian">Bahasa Indonesia</string>
+
     <string name="settings_build_info_title">Build Information</string>
     <string name="settings_build_info_subtitle">Detail teknis paket aplikasi yang terpasang</string>
     <string name="build_info_version_format">Versi APK: %1$s (Code %2$d)</string>
@@ -52,4 +68,81 @@
     <string name="build_info_arch_format">Arsitektur (ABI): %1$s</string>
     <string name="build_info_sdk_format">Android SDK: API %1$d (Android %2$s)</string>
     <string name="build_info_packs_format">Total Koleksi: %1$d Pack (%2$d Stiker)</string>
+    <string name="build_info_commit_format">Git Commit: %1$s (%2$s)</string>
+
+    <!-- Developer & Disclaimer Strings -->
+    <string name="settings_developer_title">Tentang Developer</string>
+    <string name="developer_name" translatable="false">sinanonym</string>
+    <string name="developer_handle" translatable="false">@sinavarasina</string>
+    <string name="developer_bio">Open-source enthusiast, passionate builder, dan pengembang StickerWA.</string>
+    <string name="developer_github" translatable="false">GitHub</string>
+    <string name="developer_codeberg" translatable="false">Codeberg</string>
+    <string name="developer_gitlab" translatable="false">GitLab</string>
+    <string name="developer_email_label">Email</string>
+    <string name="developer_website_label">Website</string>
+
+    <string name="settings_disclaimer_title">Copyright Notice &amp; Penafian Hukum</string>
+    <string name="disclaimer_character_text">Karakter yang ditampilkan pada logo aplikasi adalah Rias Gremory dari seri anime &amp; light novel \"High School DxD\" (Diciptakan oleh Ichiei Ishibumi, Ilustrasi oleh Miyama-Zero, Diterbitkan oleh Fujimi Shobo / KADOKAWA, Dianimasikan oleh TNK / Passione).</string>
+    <string name="disclaimer_legal_text">StickerWA adalah aplikasi buatan penggemar yang 100% gratis, non-komersial, dan nirlaba yang dibuat semata-mata untuk hiburan serta pembelajaran pribadi. Aplikasi ini TIDAK berafiliasi dengan, disahkan, dikelola, disponsori, atau didukung oleh penulis asli, penerbit, atau pemegang hak cipta terkait. Semua merek dagang, karakter, dan hak cipta adalah milik masing-masing pemiliknya.</string>
+
+    <!-- Create Custom Pack & Submission Strings -->
+    <string name="action_create_pack">Buat Sticker Pack</string>
+    <string name="title_create_sticker_pack">Buat Sticker Pack</string>
+    <string name="create_pack_section_info">Informasi Pack</string>
+    <string name="create_pack_name_hint">Nama Pack (contoh: Stiker Saya)</string>
+    <string name="create_pack_publisher_hint">Nama Author / Publisher</string>
+    <string name="create_pack_email_hint">Email Author (Untuk submit patch git)</string>
+    <string name="create_pack_website_hint">Website (Opsional)</string>
+    <string name="create_pack_tray_title">Ikon Tray</string>
+    <string name="create_pack_tray_subtitle">Ketuk untuk memilih ikon (96x96 px)</string>
+    <string name="create_pack_stickers_title">Stiker</string>
+    <string name="create_pack_stickers_count_format">%1$d / 30 stiker (min. 1)</string>
+    <string name="create_pack_add_stickers">Tambah Stiker</string>
+    <string name="create_pack_btn_save">Buat Pack</string>
+    <string name="create_pack_converting">Mengonversi dan menyiapkan stiker…</string>
+    <string name="create_pack_error_name">Harap masukkan nama pack</string>
+    <string name="create_pack_error_publisher">Harap masukkan nama author/publisher</string>
+    <string name="create_pack_error_tray">Harap pilih ikon tray</string>
+    <string name="create_pack_error_min_stickers">Minimal 1 stiker diperlukan</string>
+    <string name="create_pack_error_max_stickers">Pack stiker tidak boleh melebihi 30 stiker</string>
+    <string name="submit_to_author_button">Submit ke Author</string>
+    <string name="submit_to_author_title">Submit Pack ke Author</string>
+    <string name="submit_to_author_confirm_msg">Tindakan ini akan membuat bundle git patch dengan nama &amp; email Anda sebagai author, lalu membuka email client untuk mengirimkannya ke sina@sinanonym.my.id.</string>
+    <string name="submit_to_author_email_subject">[StickerWA Pack Submission] %1$s</string>
+    <string name="custom_pack_badge">CUSTOM</string>
+    <string name="delete_pack_button">Hapus Pack</string>
+    <string name="delete_pack_confirm">Apakah Anda yakin ingin menghapus custom pack ini dari perangkat Anda?</string>
+
+    <!-- Selection Mode & Batch Actions Strings -->
+    <string name="selection_count_format">%1$d Terpilih</string>
+    <string name="batch_submit_title">Submit Pack ke Author</string>
+    <string name="batch_submit_confirm">Tindakan ini akan membuat bundle git patch untuk %1$d sticker pack yang dipilih dan membuka email client untuk mengirimkannya ke sina@sinanonym.my.id.</string>
+    <string name="batch_delete_title">Hapus Pack Terpilih</string>
+    <string name="batch_delete_confirm">Apakah Anda yakin ingin menghapus %1$d custom sticker pack yang dipilih dari perangkat Anda?</string>
+    <string name="batch_delete_success">Berhasil menghapus %1$d sticker pack</string>
+    <string name="select_custom_only_notice">Hanya custom pack yang dapat dipilih untuk disubmit atau dihapus</string>
+
+    <!-- Copyright Screen Strings -->
+    <string name="settings_copyright_notice_title">Copyright Notice</string>
+    <string name="settings_copyright_notice_subtitle">Copyright notice lihat detail →</string>
+    <string name="copyright_screen_title">Copyright Notice</string>
+    <string name="copyright_character_title">Karya Karakter &amp; Logo Aplikasi</string>
+    <string name="copyright_character_subtitle">Rias Gremory (High School DxD)</string>
+    <string name="copyright_fair_use_title">Penggunaan Wajar Non-Komersial (Fair Use)</string>
+    <string name="copyright_fair_use_subtitle">Proyek Hobi Gratis &amp; Open Source</string>
+    <string name="copyright_community_title">Submission Komunitas &amp; Takedown</string>
+    <string name="copyright_community_subtitle">Hak Cipta &amp; Permintaan Penghapusan Konten</string>
+    <string name="copyright_whatsapp_title">Pemberitahuan Merek Dagang WhatsApp</string>
+    <string name="copyright_whatsapp_subtitle">Aplikasi Pihak Ketiga Independen</string>
+    <string name="copyright_community_text">Paket stiker dan kontribusi pengguna disediakan untuk keperluan komunikasi pribadi. Jika Anda adalah pemegang hak cipta atau perwakilannya dan ingin meminta penghapusan aset stiker tertentu, silakan kirim email langsung ke sina@sinanonym.my.id dengan bukti dan detail terkait. Konten yang melanggar akan segera ditinjau dan dihapus.</string>
+    <string name="copyright_whatsapp_text">WhatsApp adalah merek dagang terdaftar dari Meta Platforms, Inc. Aplikasi ini adalah alat pihak ketiga yang independen dan tidak didukung oleh, disponsori oleh, atau terafiliasi secara langsung dengan Meta Platforms, Inc. atau WhatsApp.</string>
+
+    <!-- Common Dialog Actions & Toasts -->
+    <string name="dialog_btn_submit">Submit</string>
+    <string name="dialog_btn_delete">Hapus</string>
+    <string name="error_no_browser">Tidak ada aplikasi browser untuk membuka tautan.</string>
+    <string name="error_no_email_app">Tidak ada aplikasi email ditemukan.</string>
+    <string name="create_pack_success_toast">Sticker pack \'%1$s\' berhasil dibuat!</string>
+    <string name="submission_error_toast">Gagal membuat email submission: %1$s</string>
+    <string name="batch_submission_error_toast">Gagal membuat batch email submission: %1$s</string>
 </resources>

@@ -226,6 +226,7 @@
 
         </LinearLayout>
 
+        <!-- Custom Pack Actions: Submit to Author & Delete Pack -->
         <!-- Bottom Horizontal Sticker Strip inside the Card -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/floating_horizontal_sticker_list"

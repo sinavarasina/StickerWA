@@ -32,6 +32,7 @@ import java.util.concurrent.Future;
 
 import id.my.sinanonym.stickerwa.R;
 import id.my.sinanonym.stickerwa.core.AppExecutors;
+import id.my.sinanonym.stickerwa.core.StickerPackExporter;
 import id.my.sinanonym.stickerwa.data.StickerRepository;
 import id.my.sinanonym.stickerwa.data.model.StickerPack;
 import id.my.sinanonym.stickerwa.ui.base.BaseActivity;
@@ -138,11 +139,26 @@ public class StickerPackDetailsActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar, menu);
+        MenuItem submitItem = menu.findItem(R.id.action_submit_to_author);
+        if (submitItem != null) {
+            submitItem.setVisible(stickerPack != null && stickerPack.isCustom());
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_submit_to_author && stickerPack != null) {
+            new androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setTitle(R.string.submit_to_author_title)
+                    .setMessage(R.string.submit_to_author_confirm_msg)
+                    .setPositiveButton(R.string.dialog_btn_submit, (dialog, which) -> {
+                        StickerPackExporter.launchSubmissionEmail(this, stickerPack);
+                    })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
+            return true;
+        }
         if (item.getItemId() == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
