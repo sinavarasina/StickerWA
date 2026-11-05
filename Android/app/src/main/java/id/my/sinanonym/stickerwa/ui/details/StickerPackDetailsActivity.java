@@ -6,11 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package id.my.sinanonym.stickerwa;
+package id.my.sinanonym.stickerwa.ui.details;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.Formatter;
 import android.view.Menu;
@@ -21,21 +21,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.lang.ref.WeakReference;
+import java.util.concurrent.Future;
 
-public class StickerPackDetailsActivity extends AddStickerPackActivity {
+import id.my.sinanonym.stickerwa.R;
+import id.my.sinanonym.stickerwa.core.AppExecutors;
+import id.my.sinanonym.stickerwa.core.ThemePreferences;
+import id.my.sinanonym.stickerwa.data.StickerRepository;
+import id.my.sinanonym.stickerwa.data.model.StickerPack;
+import id.my.sinanonym.stickerwa.ui.base.BaseActivity;
+import id.my.sinanonym.stickerwa.ui.info.StickerPackInfoActivity;
+import id.my.sinanonym.stickerwa.whatsapp.WhatsAppStickerLauncher;
+import id.my.sinanonym.stickerwa.whatsapp.WhitelistCheck;
+
+public class StickerPackDetailsActivity extends BaseActivity {
 
     /**
      * Do not change below values of below 3 lines as this is also used by WhatsApp
      */
-    public static final String EXTRA_STICKER_PACK_ID = "sticker_pack_id";
-    public static final String EXTRA_STICKER_PACK_AUTHORITY = "sticker_pack_authority";
-    public static final String EXTRA_STICKER_PACK_NAME = "sticker_pack_name";
+    public static final String EXTRA_STICKER_PACK_ID = WhatsAppStickerLauncher.EXTRA_STICKER_PACK_ID;
+    public static final String EXTRA_STICKER_PACK_AUTHORITY = WhatsAppStickerLauncher.EXTRA_STICKER_PACK_AUTHORITY;
+    public static final String EXTRA_STICKER_PACK_NAME = WhatsAppStickerLauncher.EXTRA_STICKER_PACK_NAME;
 
     public static final String EXTRA_STICKER_PACK_WEBSITE = "sticker_pack_website";
     public static final String EXTRA_STICKER_PACK_EMAIL = "sticker_pack_email";
@@ -45,7 +56,6 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
     public static final String EXTRA_SHOW_UP_BUTTON = "show_up_button";
     public static final String EXTRA_STICKER_PACK_DATA = "sticker_pack";
 
-
     private RecyclerView recyclerView;
     private GridLayoutManager layoutManager;
     private StickerPreviewAdapter stickerPreviewAdapter;
@@ -54,8 +64,8 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
     private View alreadyAddedText;
     private StickerPack stickerPack;
     private View divider;
-    private WhiteListCheckAsyncTask whiteListCheckAsyncTask;
-
+    @Nullable
+    private Future<?> whitelistTaskFuture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,30 +88,45 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
         recyclerView.addOnScrollListener(dividerScrollListener);
         divider = findViewById(R.id.divider);
         if (stickerPreviewAdapter == null) {
-            stickerPreviewAdapter = new StickerPreviewAdapter(getLayoutInflater(), R.drawable.sticker_error, getResources().getDimensionPixelSize(R.dimen.sticker_pack_details_image_size), getResources().getDimensionPixelSize(R.dimen.sticker_pack_details_image_padding), stickerPack, expandedStickerView);
+            stickerPreviewAdapter = new StickerPreviewAdapter(
+                    getLayoutInflater(),
+                    R.drawable.sticker_error,
+                    getResources().getDimensionPixelSize(R.dimen.sticker_pack_details_image_size),
+                    getResources().getDimensionPixelSize(R.dimen.sticker_pack_details_image_padding),
+                    stickerPack,
+                    expandedStickerView
+            );
             recyclerView.setAdapter(stickerPreviewAdapter);
         }
         packNameTextView.setText(stickerPack.name);
         packPublisherTextView.setText(stickerPack.publisher);
-        packTrayIcon.setImageURI(StickerPackLoader.getStickerAssetUri(stickerPack.identifier, stickerPack.trayImageFile));
+        packTrayIcon.setImageURI(StickerRepository.getStickerAssetUri(stickerPack.identifier, stickerPack.trayImageFile));
         packSizeTextView.setText(Formatter.formatShortFileSize(this, stickerPack.getTotalSize()));
-        addButton.setOnClickListener(v -> addStickerPackToWhatsApp(stickerPack.identifier, stickerPack.name));
+        addButton.setOnClickListener(v -> WhatsAppStickerLauncher.addStickerPackToWhatsApp(this, stickerPack.identifier, stickerPack.name));
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(showUpButton);
-            getSupportActionBar().setTitle(showUpButton ? getResources().getString(R.string.title_activity_sticker_pack_details_multiple_pack) : getResources().getQuantityString(R.plurals.title_activity_sticker_packs_list, 1));
+            getSupportActionBar().setTitle(showUpButton
+                    ? getResources().getString(R.string.title_activity_sticker_pack_details_multiple_pack)
+                    : getResources().getQuantityString(R.plurals.title_activity_sticker_packs_list, 1));
         }
         findViewById(R.id.sticker_pack_animation_indicator).setVisibility(stickerPack.animatedStickerPack ? View.VISIBLE : View.GONE);
     }
 
     private void launchInfoActivity(String publisherWebsite, String publisherEmail, String privacyPolicyWebsite, String licenseAgreementWebsite, String trayIconUriString) {
         Intent intent = new Intent(StickerPackDetailsActivity.this, StickerPackInfoActivity.class);
-        intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_ID, stickerPack.identifier);
-        intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_WEBSITE, publisherWebsite);
-        intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_EMAIL, publisherEmail);
-        intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_PRIVACY_POLICY, privacyPolicyWebsite);
-        intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_LICENSE_AGREEMENT, licenseAgreementWebsite);
-        intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_TRAY_ICON, trayIconUriString);
+        intent.putExtra(EXTRA_STICKER_PACK_ID, stickerPack.identifier);
+        intent.putExtra(EXTRA_STICKER_PACK_WEBSITE, publisherWebsite);
+        intent.putExtra(EXTRA_STICKER_PACK_EMAIL, publisherEmail);
+        intent.putExtra(EXTRA_STICKER_PACK_PRIVACY_POLICY, privacyPolicyWebsite);
+        intent.putExtra(EXTRA_STICKER_PACK_LICENSE_AGREEMENT, licenseAgreementWebsite);
+        intent.putExtra(EXTRA_STICKER_PACK_TRAY_ICON, trayIconUriString);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        WhatsAppStickerLauncher.handleActivityResult(this, requestCode, resultCode, data);
     }
 
     @Override
@@ -117,18 +142,24 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
             return true;
         }
         if (item.getItemId() == R.id.action_info && stickerPack != null) {
-            Uri trayIconUri = StickerPackLoader.getStickerAssetUri(stickerPack.identifier, stickerPack.trayImageFile);
-            launchInfoActivity(stickerPack.publisherWebsite, stickerPack.publisherEmail, stickerPack.privacyPolicyWebsite, stickerPack.licenseAgreementWebsite, trayIconUri.toString());
+            Uri trayIconUri = StickerRepository.getStickerAssetUri(stickerPack.identifier, stickerPack.trayImageFile);
+            launchInfoActivity(
+                    stickerPack.publisherWebsite,
+                    stickerPack.publisherEmail,
+                    stickerPack.privacyPolicyWebsite,
+                    stickerPack.licenseAgreementWebsite,
+                    trayIconUri.toString()
+            );
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-
     private final ViewTreeObserver.OnGlobalLayoutListener pageLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
         @Override
         public void onGlobalLayout() {
-            setNumColumns(recyclerView.getWidth() / recyclerView.getContext().getResources().getDimensionPixelSize(R.dimen.sticker_pack_details_image_size));
+            int cols = recyclerView.getWidth() / recyclerView.getContext().getResources().getDimensionPixelSize(R.dimen.sticker_pack_details_image_size);
+            setNumColumns(Math.max(cols, 1));
         }
     };
 
@@ -166,20 +197,24 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        whiteListCheckAsyncTask = new WhiteListCheckAsyncTask(this);
-        whiteListCheckAsyncTask.execute(stickerPack);
+        if (stickerPack != null) {
+            final Context appContext = getApplicationContext();
+            final String packId = stickerPack.identifier;
+            whitelistTaskFuture = AppExecutors.execute(
+                    () -> WhitelistCheck.isWhitelisted(appContext, packId),
+                    this::updateAddUI
+            );
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (whiteListCheckAsyncTask != null && !whiteListCheckAsyncTask.isCancelled()) {
-            whiteListCheckAsyncTask.cancel(true);
-        }
+        AppExecutors.cancel(whitelistTaskFuture);
     }
 
     private void updateAddUI(Boolean isWhitelisted) {
-        if (isWhitelisted) {
+        if (Boolean.TRUE.equals(isWhitelisted)) {
             addButton.setVisibility(View.GONE);
             alreadyAddedText.setVisibility(View.VISIBLE);
             findViewById(R.id.sticker_pack_details_tap_to_preview).setVisibility(View.GONE);
@@ -187,32 +222,6 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
             addButton.setVisibility(View.VISIBLE);
             alreadyAddedText.setVisibility(View.GONE);
             findViewById(R.id.sticker_pack_details_tap_to_preview).setVisibility(View.VISIBLE);
-        }
-    }
-
-    static class WhiteListCheckAsyncTask extends AsyncTask<StickerPack, Void, Boolean> {
-        private final WeakReference<StickerPackDetailsActivity> stickerPackDetailsActivityWeakReference;
-
-        WhiteListCheckAsyncTask(StickerPackDetailsActivity stickerPackListActivity) {
-            this.stickerPackDetailsActivityWeakReference = new WeakReference<>(stickerPackListActivity);
-        }
-
-        @Override
-        protected final Boolean doInBackground(StickerPack... stickerPacks) {
-            StickerPack stickerPack = stickerPacks[0];
-            final StickerPackDetailsActivity stickerPackDetailsActivity = stickerPackDetailsActivityWeakReference.get();
-            if (stickerPackDetailsActivity == null) {
-                return false;
-            }
-            return WhitelistCheck.isWhitelisted(stickerPackDetailsActivity, stickerPack.identifier);
-        }
-
-        @Override
-        protected void onPostExecute(Boolean isWhitelisted) {
-            final StickerPackDetailsActivity stickerPackDetailsActivity = stickerPackDetailsActivityWeakReference.get();
-            if (stickerPackDetailsActivity != null) {
-                stickerPackDetailsActivity.updateAddUI(isWhitelisted);
-            }
         }
     }
 }

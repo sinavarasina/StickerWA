@@ -12,6 +12,8 @@ import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
+import id.my.sinanonym.stickerwa.core.ThemePreferences;
+
 public class StickerApplication extends Application {
 
     @Override

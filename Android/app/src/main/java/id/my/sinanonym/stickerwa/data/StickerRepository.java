@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package id.my.sinanonym.stickerwa;
+package id.my.sinanonym.stickerwa.data;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -24,36 +25,50 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import static id.my.sinanonym.stickerwa.StickerContentProvider.ANDROID_APP_DOWNLOAD_LINK_IN_QUERY;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.ANIMATED_STICKER_PACK;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.AVOID_CACHE;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.IMAGE_DATA_VERSION;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.IOS_APP_DOWNLOAD_LINK_IN_QUERY;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.LICENSE_AGREEMENT_WEBSITE;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.PRIVACY_POLICY_WEBSITE;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.PUBLISHER_EMAIL;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.PUBLISHER_WEBSITE;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.STICKER_FILE_ACCESSIBILITY_TEXT_IN_QUERY;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.STICKER_FILE_EMOJI_IN_QUERY;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.STICKER_FILE_NAME_IN_QUERY;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.STICKER_PACK_ICON_IN_QUERY;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.STICKER_PACK_IDENTIFIER_IN_QUERY;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.STICKER_PACK_NAME_IN_QUERY;
-import static id.my.sinanonym.stickerwa.StickerContentProvider.STICKER_PACK_PUBLISHER_IN_QUERY;
+import id.my.sinanonym.stickerwa.BuildConfig;
+import id.my.sinanonym.stickerwa.data.model.Sticker;
+import id.my.sinanonym.stickerwa.data.model.StickerPack;
+import id.my.sinanonym.stickerwa.provider.StickerContentProvider;
 
-class StickerPackLoader {
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.ANDROID_APP_DOWNLOAD_LINK_IN_QUERY;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.ANIMATED_STICKER_PACK;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.AVOID_CACHE;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.IMAGE_DATA_VERSION;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.IOS_APP_DOWNLOAD_LINK_IN_QUERY;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.LICENSE_AGREEMENT_WEBSITE;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.PRIVACY_POLICY_WEBSITE;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.PUBLISHER_EMAIL;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.PUBLISHER_WEBSITE;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.STICKER_FILE_ACCESSIBILITY_TEXT_IN_QUERY;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.STICKER_FILE_EMOJI_IN_QUERY;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.STICKER_FILE_NAME_IN_QUERY;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.STICKER_PACK_ICON_IN_QUERY;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.STICKER_PACK_IDENTIFIER_IN_QUERY;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.STICKER_PACK_NAME_IN_QUERY;
+import static id.my.sinanonym.stickerwa.provider.StickerContentProvider.STICKER_PACK_PUBLISHER_IN_QUERY;
+
+public final class StickerRepository {
+
+    @Nullable
+    private static ArrayList<StickerPack> cachedStickerPacks;
+
+    private StickerRepository() {}
 
     /**
-     * Get the list of sticker packs for the sticker content provider
+     * Fetches and validates sticker packs from the content provider, caching them in memory.
      */
     @NonNull
-    static ArrayList<StickerPack> fetchStickerPacks(Context context) throws IllegalStateException {
+    public static synchronized ArrayList<StickerPack> fetchStickerPacks(@NonNull Context context) throws IllegalStateException {
+        if (cachedStickerPacks != null && !cachedStickerPacks.isEmpty()) {
+            return new ArrayList<>(cachedStickerPacks);
+        }
         final Cursor cursor = context.getContentResolver().query(StickerContentProvider.AUTHORITY_URI, null, null, null, null);
         if (cursor == null) {
             throw new IllegalStateException("could not fetch from content provider, " + BuildConfig.CONTENT_PROVIDER_AUTHORITY);
         }
         HashSet<String> identifierSet = new HashSet<>();
         final ArrayList<StickerPack> stickerPackList = fetchFromContentProvider(cursor);
+        cursor.close();
         for (StickerPack stickerPack : stickerPackList) {
             if (identifierSet.contains(stickerPack.identifier)) {
                 throw new IllegalStateException("sticker pack identifiers should be unique, there are more than one pack with identifier:" + stickerPack.identifier);
@@ -69,7 +84,8 @@ class StickerPackLoader {
             stickerPack.setStickers(stickers);
             StickerPackValidator.verifyStickerPackValidity(context, stickerPack);
         }
-        return stickerPackList;
+        cachedStickerPacks = stickerPackList;
+        return new ArrayList<>(cachedStickerPacks);
     }
 
     @NonNull
@@ -90,7 +106,6 @@ class StickerPackLoader {
         return stickers;
     }
 
-
     @NonNull
     private static ArrayList<StickerPack> fetchFromContentProvider(Cursor cursor) {
         ArrayList<StickerPack> stickerPackList = new ArrayList<>();
@@ -109,7 +124,18 @@ class StickerPackLoader {
             final String imageDataVersion = cursor.getString(cursor.getColumnIndexOrThrow(IMAGE_DATA_VERSION));
             final boolean avoidCache = cursor.getShort(cursor.getColumnIndexOrThrow(AVOID_CACHE)) > 0;
             final boolean animatedStickerPack = cursor.getShort(cursor.getColumnIndexOrThrow(ANIMATED_STICKER_PACK)) > 0;
-            final StickerPack stickerPack = new StickerPack(identifier, name, publisher, trayImage, publisherEmail, publisherWebsite, privacyPolicyWebsite, licenseAgreementWebsite, imageDataVersion, avoidCache, animatedStickerPack);
+            final StickerPack stickerPack = new StickerPack(
+                    identifier,
+                    name,
+                    publisher,
+                    trayImage,
+                    publisherEmail,
+                    publisherWebsite,
+                    privacyPolicyWebsite,
+                    licenseAgreementWebsite,
+                    imageDataVersion,
+                    avoidCache,
+                    animatedStickerPack);
             stickerPack.setAndroidPlayStoreLink(androidPlayStoreLink);
             stickerPack.setIosAppStoreLink(iosAppLink);
             stickerPackList.add(stickerPack);
@@ -143,7 +169,8 @@ class StickerPackLoader {
         return stickers;
     }
 
-    static byte[] fetchStickerAsset(@NonNull final String identifier, @NonNull final String name, ContentResolver contentResolver) throws IOException {
+    @NonNull
+    public static byte[] fetchStickerAsset(@NonNull final String identifier, @NonNull final String name, ContentResolver contentResolver) throws IOException {
         try (final InputStream inputStream = contentResolver.openInputStream(getStickerAssetUri(identifier, name));
              final ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
             if (inputStream == null) {
@@ -159,11 +186,24 @@ class StickerPackLoader {
         }
     }
 
-    private static Uri getStickerListUri(String identifier) {
-        return new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT).authority(BuildConfig.CONTENT_PROVIDER_AUTHORITY).appendPath(StickerContentProvider.STICKERS).appendPath(identifier).build();
+    @NonNull
+    public static Uri getStickerListUri(String identifier) {
+        return new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(BuildConfig.CONTENT_PROVIDER_AUTHORITY)
+                .appendPath(StickerContentProvider.STICKERS)
+                .appendPath(identifier)
+                .build();
     }
 
-    static Uri getStickerAssetUri(String identifier, String stickerName) {
-        return new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT).authority(BuildConfig.CONTENT_PROVIDER_AUTHORITY).appendPath(StickerContentProvider.STICKERS_ASSET).appendPath(identifier).appendPath(stickerName).build();
+    @NonNull
+    public static Uri getStickerAssetUri(String identifier, String stickerName) {
+        return new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(BuildConfig.CONTENT_PROVIDER_AUTHORITY)
+                .appendPath(StickerContentProvider.STICKERS_ASSET)
+                .appendPath(identifier)
+                .appendPath(stickerName)
+                .build();
     }
 }

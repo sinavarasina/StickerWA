@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package id.my.sinanonym.stickerwa;
+package id.my.sinanonym.stickerwa.ui.base;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -17,6 +17,8 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+
+import id.my.sinanonym.stickerwa.core.ThemePreferences;
 
 public abstract class BaseActivity extends AppCompatActivity {
     @Override
@@ -35,7 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         private static final String ARG_TITLE_ID = "title_id";
         private static final String ARG_MESSAGE = "message";
 
-        static DialogFragment newInstance(@StringRes int titleId, String message) {
+        public static DialogFragment newInstance(@StringRes int titleId, String message) {
             DialogFragment fragment = new MessageDialogFragment();
             Bundle arguments = new Bundle();
             arguments.putInt(ARG_TITLE_ID, titleId);
@@ -47,10 +49,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            @StringRes final int title = getArguments().getInt(ARG_TITLE_ID);
-            String message = getArguments().getString(ARG_MESSAGE);
+            @StringRes final int title = requireArguments().getInt(ARG_TITLE_ID);
+            String message = requireArguments().getString(ARG_MESSAGE);
 
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity())
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(requireActivity())
                     .setMessage(message)
                     .setCancelable(true)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> dismiss());

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package id.my.sinanonym.stickerwa;
+package id.my.sinanonym.stickerwa.ui.details;
 
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -20,7 +20,11 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-public class StickerPreviewAdapter extends RecyclerView.Adapter<StickerPreviewViewHolder> {
+import id.my.sinanonym.stickerwa.R;
+import id.my.sinanonym.stickerwa.data.StickerRepository;
+import id.my.sinanonym.stickerwa.data.model.StickerPack;
+
+public class StickerPreviewAdapter extends RecyclerView.Adapter<StickerPreviewAdapter.ViewHolder> {
 
     private static final float COLLAPSED_STICKER_PREVIEW_BACKGROUND_ALPHA = 1f;
     private static final float EXPANDED_STICKER_PREVIEW_BACKGROUND_ALPHA = 0.2f;
@@ -37,10 +41,10 @@ public class StickerPreviewAdapter extends RecyclerView.Adapter<StickerPreviewVi
     private final LayoutInflater layoutInflater;
     private RecyclerView recyclerView;
     private View clickedStickerPreview;
-    float expandedViewLeftX;
-    float expandedViewTopY;
+    private float expandedViewLeftX;
+    private float expandedViewTopY;
 
-    StickerPreviewAdapter(
+    public StickerPreviewAdapter(
             @NonNull final LayoutInflater layoutInflater,
             final int errorResource,
             final int cellSize,
@@ -58,9 +62,9 @@ public class StickerPreviewAdapter extends RecyclerView.Adapter<StickerPreviewVi
 
     @NonNull
     @Override
-    public StickerPreviewViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, final int i) {
+    public ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, final int i) {
         View itemView = layoutInflater.inflate(R.layout.sticker_image_item, viewGroup, false);
-        StickerPreviewViewHolder vh = new StickerPreviewViewHolder(itemView);
+        ViewHolder vh = new ViewHolder(itemView);
 
         ViewGroup.LayoutParams layoutParams = vh.stickerPreviewView.getLayoutParams();
         layoutParams.height = cellSize;
@@ -72,10 +76,10 @@ public class StickerPreviewAdapter extends RecyclerView.Adapter<StickerPreviewVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final StickerPreviewViewHolder stickerPreviewViewHolder, final int i) {
-        stickerPreviewViewHolder.stickerPreviewView.setImageResource(errorResource);
-        stickerPreviewViewHolder.stickerPreviewView.setImageURI(StickerPackLoader.getStickerAssetUri(stickerPack.identifier, stickerPack.getStickers().get(i).imageFileName));
-        stickerPreviewViewHolder.stickerPreviewView.setOnClickListener(v -> expandPreview(i, stickerPreviewViewHolder.stickerPreviewView));
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
+        viewHolder.stickerPreviewView.setImageResource(errorResource);
+        viewHolder.stickerPreviewView.setImageURI(StickerRepository.getStickerAssetUri(stickerPack.identifier, stickerPack.getStickers().get(i).imageFileName));
+        viewHolder.stickerPreviewView.setOnClickListener(v -> expandPreview(i, viewHolder.stickerPreviewView));
     }
 
     @Override
@@ -105,9 +109,6 @@ public class StickerPreviewAdapter extends RecyclerView.Adapter<StickerPreviewVi
 
     private void positionExpandedStickerPreview(int selectedPosition) {
         if (expandedStickerPreview != null) {
-            // Calculate the view's center (x, y), then use expandedStickerPreview's height and
-            // width to
-            // figure out what where to position it.
             final ViewGroup.MarginLayoutParams recyclerViewLayoutParams =
                     ((ViewGroup.MarginLayoutParams) recyclerView.getLayoutParams());
             final int recyclerViewLeftMargin = recyclerViewLayoutParams.leftMargin;
@@ -115,9 +116,8 @@ public class StickerPreviewAdapter extends RecyclerView.Adapter<StickerPreviewVi
             final int recyclerViewWidth = recyclerView.getWidth();
             final int recyclerViewHeight = recyclerView.getHeight();
 
-            final StickerPreviewViewHolder clickedViewHolder =
-                    (StickerPreviewViewHolder)
-                            recyclerView.findViewHolderForAdapterPosition(selectedPosition);
+            final ViewHolder clickedViewHolder =
+                    (ViewHolder) recyclerView.findViewHolderForAdapterPosition(selectedPosition);
             if (clickedViewHolder == null) {
                 hideExpandedStickerPreview();
                 return;
@@ -133,13 +133,9 @@ public class StickerPreviewAdapter extends RecyclerView.Adapter<StickerPreviewVi
             expandedViewLeftX = clickedViewCenterX - expandedStickerPreview.getWidth() / 2f;
             expandedViewTopY = clickedViewCenterY - expandedStickerPreview.getHeight() / 2f;
 
-            // If the new x or y positions are negative, anchor them to 0 to avoid clipping
-            // the left side of the device and the top of the recycler view.
             expandedViewLeftX = Math.max(expandedViewLeftX, 0);
             expandedViewTopY = Math.max(expandedViewTopY, 0);
 
-            // If the bottom or right sides are clipped, we need to move the top left positions
-            // so that those sides are no longer clipped.
             final float adjustmentX =
                     Math.max(
                             expandedViewLeftX
@@ -152,7 +148,6 @@ public class StickerPreviewAdapter extends RecyclerView.Adapter<StickerPreviewVi
 
             expandedViewLeftX -= adjustmentX;
             expandedViewTopY -= adjustmentY;
-
 
             expandedStickerPreview.setX(expandedViewLeftX);
             expandedStickerPreview.setY(expandedViewTopY);
@@ -169,7 +164,10 @@ public class StickerPreviewAdapter extends RecyclerView.Adapter<StickerPreviewVi
         if (expandedStickerPreview != null) {
             positionExpandedStickerPreview(position);
 
-            final Uri stickerAssetUri = StickerPackLoader.getStickerAssetUri(stickerPack.identifier, stickerPack.getStickers().get(position).imageFileName);
+            final Uri stickerAssetUri = StickerRepository.getStickerAssetUri(
+                    stickerPack.identifier,
+                    stickerPack.getStickers().get(position).imageFileName
+            );
             DraweeController controller = Fresco.newDraweeControllerBuilder()
                     .setUri(stickerAssetUri)
                     .setAutoPlayAnimations(true)
@@ -198,11 +196,19 @@ public class StickerPreviewAdapter extends RecyclerView.Adapter<StickerPreviewVi
 
     @Override
     public int getItemCount() {
-        int numberOfPreviewImagesInPack;
-        numberOfPreviewImagesInPack = stickerPack.getStickers().size();
+        int numberOfPreviewImagesInPack = stickerPack.getStickers().size();
         if (cellLimit > 0) {
             return Math.min(numberOfPreviewImagesInPack, cellLimit);
         }
         return numberOfPreviewImagesInPack;
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public final SimpleDraweeView stickerPreviewView;
+
+        ViewHolder(final View itemView) {
+            super(itemView);
+            stickerPreviewView = itemView.findViewById(R.id.sticker_preview);
+        }
     }
 }

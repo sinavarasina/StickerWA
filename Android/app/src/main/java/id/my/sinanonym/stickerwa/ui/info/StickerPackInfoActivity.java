@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package id.my.sinanonym.stickerwa;
+package id.my.sinanonym.stickerwa.ui.info;
 
 import android.content.Intent;
 import android.graphics.Rect;
@@ -20,12 +20,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+
+import id.my.sinanonym.stickerwa.R;
+import id.my.sinanonym.stickerwa.ui.base.BaseActivity;
+import id.my.sinanonym.stickerwa.ui.details.StickerPackDetailsActivity;
 
 public class StickerPackInfoActivity extends BaseActivity {
 
@@ -45,8 +49,10 @@ public class StickerPackInfoActivity extends BaseActivity {
         try {
             final InputStream inputStream = getContentResolver().openInputStream(Uri.parse(trayIconUriString));
             final BitmapDrawable trayDrawable = new BitmapDrawable(getResources(), inputStream);
-            final Drawable emailDrawable = getDrawableForAllAPIs(R.drawable.sticker_3rdparty_email);
-            trayDrawable.setBounds(new Rect(0, 0, emailDrawable.getIntrinsicWidth(), emailDrawable.getIntrinsicHeight()));
+            final Drawable emailDrawable = ContextCompat.getDrawable(this, R.drawable.sticker_3rdparty_email);
+            if (emailDrawable != null) {
+                trayDrawable.setBounds(new Rect(0, 0, emailDrawable.getIntrinsicWidth(), emailDrawable.getIntrinsicHeight()));
+            }
             if (Build.VERSION.SDK_INT > 17) {
                 trayIcon.setCompoundDrawablesRelative(trayDrawable, null, null, null);
             } else {
@@ -70,7 +76,6 @@ public class StickerPackInfoActivity extends BaseActivity {
         }
 
         setupTextView(privacyPolicy, R.id.privacy_policy);
-
         setupTextView(licenseAgreement, R.id.license_agreement);
     }
 
@@ -84,8 +89,7 @@ public class StickerPackInfoActivity extends BaseActivity {
     }
 
     private void launchEmailClient(String email) {
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                "mailto", email, null));
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", email, null));
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
         startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.info_send_email_to_prompt)));
     }
@@ -94,13 +98,5 @@ public class StickerPackInfoActivity extends BaseActivity {
         Uri uri = Uri.parse(website);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
-    }
-
-    private Drawable getDrawableForAllAPIs(@DrawableRes int id) {
-        if (Build.VERSION.SDK_INT >= 21) {
-            return getDrawable(id);
-        } else {
-            return getResources().getDrawable(id);
-        }
     }
 }

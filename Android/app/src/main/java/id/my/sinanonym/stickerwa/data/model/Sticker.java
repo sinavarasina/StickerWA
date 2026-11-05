@@ -6,26 +6,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package id.my.sinanonym.stickerwa;
+package id.my.sinanonym.stickerwa.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.List;
 
-class Sticker implements Parcelable {
-    final String imageFileName;
-    final List<String> emojis;
-    final String accessibilityText;
-    long size;
+public class Sticker implements Parcelable {
+    public final String imageFileName;
+    public final List<String> emojis;
+    public final String accessibilityText;
+    public long size;
 
-    Sticker(String imageFileName, List<String> emojis, String accessibilityText) {
+    public Sticker(String imageFileName, List<String> emojis, String accessibilityText) {
         this.imageFileName = imageFileName;
         this.emojis = emojis;
         this.accessibilityText = accessibilityText;
     }
 
-    private Sticker(Parcel in) {
+    protected Sticker(Parcel in) {
         imageFileName = in.readString();
         emojis = in.createStringArrayList();
         accessibilityText = in.readString();

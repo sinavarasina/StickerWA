@@ -6,32 +6,32 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package id.my.sinanonym.stickerwa;
+package id.my.sinanonym.stickerwa.data;
 
 import android.text.TextUtils;
 import android.util.JsonReader;
 
 import androidx.annotation.NonNull;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-class ContentFileParser {
+import id.my.sinanonym.stickerwa.data.model.Sticker;
+import id.my.sinanonym.stickerwa.data.model.StickerPack;
+
+public final class ContentFileParser {
 
     private static final String FIELD_STICKER_IMAGE_FILE = "image_file";
     private static final String FIELD_STICKER_EMOJIS = "emojis";
     private static final String FIELD_STICKER_ACCESSIBILITY_TEXT = "accessibility_text";
 
+    private ContentFileParser() {}
+
     @NonNull
-    static List<StickerPack> parseStickerPacks(@NonNull InputStream contentsInputStream) throws IOException, IllegalStateException {
+    public static List<StickerPack> parseStickerPacks(@NonNull InputStream contentsInputStream) throws IOException, IllegalStateException {
         try (JsonReader reader = new JsonReader(new InputStreamReader(contentsInputStream))) {
             return readStickerPacks(reader);
         }
@@ -151,7 +151,18 @@ class ContentFileParser {
             throw new IllegalStateException("image_data_version should not be empty");
         }
         reader.endObject();
-        final StickerPack stickerPack = new StickerPack(identifier, name, publisher, trayImageFile, publisherEmail, publisherWebsite, privacyPolicyWebsite, licenseAgreementWebsite, imageDataVersion, avoidCache, animatedStickerPack);
+        final StickerPack stickerPack = new StickerPack(
+                identifier,
+                name,
+                publisher,
+                trayImageFile,
+                publisherEmail,
+                publisherWebsite,
+                privacyPolicyWebsite,
+                licenseAgreementWebsite,
+                imageDataVersion,
+                avoidCache,
+                animatedStickerPack);
         stickerPack.setStickers(stickerList);
         return stickerPack;
     }
@@ -200,5 +211,4 @@ class ContentFileParser {
         reader.endArray();
         return stickerList;
     }
-
 }

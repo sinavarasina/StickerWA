@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package id.my.sinanonym.stickerwa;
+package id.my.sinanonym.stickerwa.data;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -27,10 +27,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-class StickerPackValidator {
-    static final int EMOJI_MAX_LIMIT = 3;
-    static final int MAX_STATIC_STICKER_A11Y_TEXT_CHAR_LIMIT = 125;
-    static final int MAX_ANIMATED_STICKER_A11Y_TEXT_CHAR_LIMIT = 255;
+import id.my.sinanonym.stickerwa.data.model.Sticker;
+import id.my.sinanonym.stickerwa.data.model.StickerPack;
+
+public final class StickerPackValidator {
+    public static final int EMOJI_MAX_LIMIT = 3;
+    public static final int MAX_STATIC_STICKER_A11Y_TEXT_CHAR_LIMIT = 125;
+    public static final int MAX_ANIMATED_STICKER_A11Y_TEXT_CHAR_LIMIT = 255;
 
     private static final int STATIC_STICKER_FILE_LIMIT_KB = 100;
     private static final int ANIMATED_STICKER_FILE_LIMIT_KB = 500;
@@ -45,15 +48,16 @@ class StickerPackValidator {
     private static final int TRAY_IMAGE_DIMENSION_MIN = 24;
     private static final int TRAY_IMAGE_DIMENSION_MAX = 512;
     private static final int ANIMATED_STICKER_FRAME_DURATION_MIN = 8;
-    private static final int ANIMATED_STICKER_TOTAL_DURATION_MAX = 10 * 1000; //ms
+    private static final int ANIMATED_STICKER_TOTAL_DURATION_MAX = 10 * 1000; // ms
     private static final String PLAY_STORE_DOMAIN = "play.google.com";
     private static final String APPLE_STORE_DOMAIN = "itunes.apple.com";
 
+    private StickerPackValidator() {}
 
     /**
      * Checks whether a sticker pack contains valid data
      */
-    static void verifyStickerPackValidity(@NonNull Context context, @NonNull StickerPack stickerPack) throws IllegalStateException {
+    public static void verifyStickerPackValidity(@NonNull Context context, @NonNull StickerPack stickerPack) throws IllegalStateException {
         if (TextUtils.isEmpty(stickerPack.identifier)) {
             throw new IllegalStateException("sticker pack identifier is empty");
         }
@@ -101,7 +105,7 @@ class StickerPackValidator {
             throw new IllegalStateException("publisher email does not seem valid, email is: " + stickerPack.publisherEmail);
         }
         try {
-            final byte[] stickerAssetBytes = StickerPackLoader.fetchStickerAsset(stickerPack.identifier, stickerPack.trayImageFile, context.getContentResolver());
+            final byte[] stickerAssetBytes = StickerRepository.fetchStickerAsset(stickerPack.identifier, stickerPack.trayImageFile, context.getContentResolver());
             if (stickerAssetBytes.length > TRAY_IMAGE_FILE_SIZE_MAX_KB * KB_IN_BYTES) {
                 throw new IllegalStateException("tray image should be less than " + TRAY_IMAGE_FILE_SIZE_MAX_KB + " KB, tray image file: " + stickerPack.trayImageFile);
             }
@@ -151,7 +155,7 @@ class StickerPackValidator {
 
     private static void validateStickerFile(@NonNull Context context, @NonNull String identifier, @NonNull final String fileName, final boolean animatedStickerPack) throws IllegalStateException {
         try {
-            final byte[] stickerInBytes = StickerPackLoader.fetchStickerAsset(identifier, fileName, context.getContentResolver());
+            final byte[] stickerInBytes = StickerRepository.fetchStickerAsset(identifier, fileName, context.getContentResolver());
             if (!animatedStickerPack && stickerInBytes.length > STATIC_STICKER_FILE_LIMIT_KB * KB_IN_BYTES) {
                 throw new IllegalStateException("static sticker should be less than " + STATIC_STICKER_FILE_LIMIT_KB + "KB, current file is " + stickerInBytes.length / KB_IN_BYTES + " KB, sticker pack identifier: " + identifier + ", filename: " + fileName);
             }
@@ -212,7 +216,6 @@ class StickerPackValidator {
             throw new IllegalStateException("url: " + websiteUrl + " is malformed", e);
         }
         return URLUtil.isHttpUrl(websiteUrl) || URLUtil.isHttpsUrl(websiteUrl);
-
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")

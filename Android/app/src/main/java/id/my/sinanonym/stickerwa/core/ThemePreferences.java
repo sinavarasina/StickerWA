@@ -1,4 +1,4 @@
-package id.my.sinanonym.stickerwa;
+package id.my.sinanonym.stickerwa.core;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import id.my.sinanonym.stickerwa.R;
 
 public final class ThemePreferences {
     private static final String PREF_NAME = "stickerwa_theme_prefs";
