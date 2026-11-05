@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="?attr/colorCardSurface"
+    app:cardCornerRadius="28dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <!-- Top Header: Tray Icon + PingPong Pack Name + Info & Close Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_preview_stage"
+                android:padding="6dp">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/floating_tray_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    fresco:actualImageScaleType="fitCenter" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <id.my.sinanonym.stickerwa.ui.widget.PingPongTextView
+                    android:id="@+id/floating_pack_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="Faiq Kecoa" />
+
+                <TextView
+                    android:id="@+id/floating_pack_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="12sp"
+                    tools:text="sinanonym • 3 Stiker • 152 KB" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/floating_info_button"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginRight="6dp"
+                android:background="@drawable/btn_circle_tonal"
+                android:contentDescription="@string/title_activity_sticker_pack_info"
+                android:padding="8dp"
+                android:src="@drawable/sticker_3rdparty_info"
+                app:tint="?android:attr/textColorPrimary" />
+
+            <ImageView
+                android:id="@+id/floating_close_button"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/btn_circle_tonal"
+                android:contentDescription="@android:string/cancel"
+                android:padding="8dp"
+                android:src="@drawable/ic_close"
+                app:tint="?android:attr/textColorPrimary" />
+
+        </LinearLayout>
+
+        <!-- HUGE Sticker Preview Stage (No Compromise) -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_preview_stage"
+            android:padding="18dp">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/floating_large_sticker_preview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                fresco:actualImageScaleType="fitCenter" />
+
+        </FrameLayout>
+
+        <!-- Action Buttons Row: Save Sticker & Add to WhatsApp (+) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Save Sticker to Storage Button -->
+            <LinearLayout
+                android:id="@+id/floating_save_sticker_button"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_pill_secondary"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_download"
+                    app:tint="?attr/colorBadgeText" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:singleLine="true"
+                    android:text="@string/save_sticker_button"
+                    android:textColor="?attr/colorBadgeText"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Add Pack to WhatsApp (+) Button -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1.2">
+
+                <LinearLayout
+                    android:id="@+id/floating_add_to_whatsapp_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_pill_primary"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/sticker_3rdparty_add"
+                        app:tint="?attr/colorOnPrimary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:singleLine="true"
+                        android:text="@string/add_pack_short_button"
+                        android:textColor="?attr/colorOnPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/floating_already_added_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/badge_pill_added"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_check_circle"
+                        app:tint="?attr/colorAddedButtonIcon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:singleLine="true"
+                        android:text="@string/details_pack_already_added"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <!-- Bottom Horizontal Sticker Strip inside the Card -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/floating_horizontal_sticker_list"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginTop="16dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            android:scrollbars="none" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

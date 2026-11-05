@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Fallback Material / Monet (Dark) for API < 31 -->
+    <color name="monet_primary">#53DBC9</color>
+    <color name="monet_primary_variant">#53DBC9</color>
+    <color name="monet_on_primary">#003731</color>
+    <color name="monet_secondary">#B1CCC6</color>
+    <color name="monet_on_secondary">#1C3531</color>
+    <color name="monet_bg">#191C1B</color>
+    <color name="monet_surface">#202624</color>
+    <color name="monet_surface_variant">#3F4946</color>
+    <color name="monet_card_surface">#252C29</color>
+    <color name="monet_card_border">#3F4946</color>
+    <color name="monet_text">#E0E3E1</color>
+    <color name="monet_subtext">#BFC9C5</color>
+</resources>

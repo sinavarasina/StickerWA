@@ -9,13 +9,11 @@
 package id.my.sinanonym.stickerwa.ui.list;
 
 import android.content.Context;
-import android.content.Intent;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,33 +26,38 @@ import java.util.List;
 import id.my.sinanonym.stickerwa.R;
 import id.my.sinanonym.stickerwa.data.StickerRepository;
 import id.my.sinanonym.stickerwa.data.model.StickerPack;
-import id.my.sinanonym.stickerwa.ui.details.StickerPackDetailsActivity;
 
 public class StickerPackListAdapter extends RecyclerView.Adapter<StickerPackListAdapter.ViewHolder> {
     @NonNull
     private List<StickerPack> stickerPacks;
     @NonNull
     private final OnAddButtonClickedListener onAddButtonClickedListener;
-    private int maxNumberOfStickersInARow;
-    private int minMarginBetweenImages;
+    @NonNull
+    private final OnPackCardClickedListener onPackCardClickedListener;
 
     public interface OnAddButtonClickedListener {
         void onAddButtonClicked(StickerPack stickerPack);
     }
 
+    public interface OnPackCardClickedListener {
+        void onPackCardClicked(StickerPack stickerPack);
+    }
+
     public StickerPackListAdapter(
             @NonNull List<StickerPack> stickerPacks,
-            @NonNull OnAddButtonClickedListener onAddButtonClickedListener) {
+            @NonNull OnAddButtonClickedListener onAddButtonClickedListener,
+            @NonNull OnPackCardClickedListener onPackCardClickedListener) {
         this.stickerPacks = stickerPacks;
         this.onAddButtonClickedListener = onAddButtonClickedListener;
+        this.onPackCardClickedListener = onPackCardClickedListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, final int i) {
         final Context context = viewGroup.getContext();
-        final LayoutInflater layoutInflater = LayoutInflater.from(context);
-        final View stickerPackRow = layoutInflater.inflate(R.layout.sticker_packs_list_item, viewGroup, false);
+        final View stickerPackRow = LayoutInflater.from(context)
+                .inflate(R.layout.sticker_packs_list_item, viewGroup, false);
         return new ViewHolder(stickerPackRow);
     }
 
@@ -62,30 +65,19 @@ public class StickerPackListAdapter extends RecyclerView.Adapter<StickerPackList
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int index) {
         StickerPack pack = stickerPacks.get(index);
         final Context context = viewHolder.publisherView.getContext();
-        viewHolder.publisherView.setText(pack.publisher);
-        viewHolder.filesizeView.setText(Formatter.formatShortFileSize(context, pack.getTotalSize()));
 
         viewHolder.titleView.setText(pack.name);
-        viewHolder.container.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), StickerPackDetailsActivity.class);
-            intent.putExtra(StickerPackDetailsActivity.EXTRA_SHOW_UP_BUTTON, true);
-            intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_DATA, pack);
-            view.getContext().startActivity(intent);
-        });
-        viewHolder.imageRowView.removeAllViews();
-        int actualNumberOfStickersToShow = Math.min(maxNumberOfStickersInARow, pack.getStickers().size());
-        for (int i = 0; i < actualNumberOfStickersToShow; i++) {
-            final SimpleDraweeView rowImage = (SimpleDraweeView) LayoutInflater.from(context)
-                    .inflate(R.layout.sticker_packs_list_image_item, viewHolder.imageRowView, false);
-            rowImage.setImageURI(StickerRepository.getStickerAssetUri(pack.identifier, pack.getStickers().get(i).imageFileName));
-            final LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) rowImage.getLayoutParams();
-            final int marginBetweenImages = minMarginBetweenImages - lp.leftMargin - lp.rightMargin;
-            if (i != actualNumberOfStickersToShow - 1 && marginBetweenImages > 0) {
-                lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin + marginBetweenImages, lp.bottomMargin);
-                rowImage.setLayoutParams(lp);
-            }
-            viewHolder.imageRowView.addView(rowImage);
-        }
+        viewHolder.publisherView.setText(pack.publisher);
+
+        String sizeText = Formatter.formatShortFileSize(context, pack.getTotalSize());
+        int count = pack.getStickers() != null ? pack.getStickers().size() : 0;
+        viewHolder.filesizeView.setText(context.getString(R.string.card_badge_count_size_format, count, sizeText));
+
+        viewHolder.trayIconView.setImageURI(
+                StickerRepository.getStickerAssetUri(pack.identifier, pack.trayImageFile)
+        );
+
+        viewHolder.container.setOnClickListener(v -> onPackCardClickedListener.onPackCardClicked(pack));
         setAddButtonAppearance(viewHolder.addButton, pack);
         viewHolder.animatedStickerPackIndicator.setVisibility(pack.animatedStickerPack ? View.VISIBLE : View.GONE);
     }
@@ -108,14 +100,6 @@ public class StickerPackListAdapter extends RecyclerView.Adapter<StickerPackList
         return stickerPacks.size();
     }
 
-    public void setImageRowSpec(int maxNumberOfStickersInARow, int minMarginBetweenImages) {
-        this.minMarginBetweenImages = minMarginBetweenImages;
-        if (this.maxNumberOfStickersInARow != maxNumberOfStickersInARow) {
-            this.maxNumberOfStickersInARow = maxNumberOfStickersInARow;
-            notifyDataSetChanged();
-        }
-    }
-
     public void setStickerPackList(@NonNull List<StickerPack> stickerPackList) {
         this.stickerPacks = stickerPackList;
     }
@@ -127,7 +111,7 @@ public class StickerPackListAdapter extends RecyclerView.Adapter<StickerPackList
         public final TextView filesizeView;
         public final ImageView addButton;
         public final ImageView animatedStickerPackIndicator;
-        public final LinearLayout imageRowView;
+        public final SimpleDraweeView trayIconView;
 
         ViewHolder(final View itemView) {
             super(itemView);
@@ -136,7 +120,7 @@ public class StickerPackListAdapter extends RecyclerView.Adapter<StickerPackList
             publisherView = itemView.findViewById(R.id.sticker_pack_publisher);
             filesizeView = itemView.findViewById(R.id.sticker_pack_filesize);
             addButton = itemView.findViewById(R.id.add_button_on_list);
-            imageRowView = itemView.findViewById(R.id.sticker_packs_list_item_image_list);
+            trayIconView = itemView.findViewById(R.id.sticker_pack_tray_icon);
             animatedStickerPackIndicator = itemView.findViewById(R.id.sticker_pack_animation_indicator);
         }
     }

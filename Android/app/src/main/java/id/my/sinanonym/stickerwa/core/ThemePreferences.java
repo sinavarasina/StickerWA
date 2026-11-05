@@ -21,6 +21,7 @@ public final class ThemePreferences {
 
     public static final String PALETTE_CATPPUCCIN = "catppuccin";
     public static final String PALETTE_GRUVBOX = "gruvbox";
+    public static final String PALETTE_MONET = "monet";
 
     private ThemePreferences() {}
 
@@ -68,6 +69,8 @@ public final class ThemePreferences {
         String palette = getPalette(context);
         if (PALETTE_GRUVBOX.equals(palette)) {
             return R.style.AppTheme_Gruvbox;
+        } else if (PALETTE_MONET.equals(palette)) {
+            return R.style.AppTheme_Monet;
         }
         return R.style.AppTheme_Catppuccin;
     }

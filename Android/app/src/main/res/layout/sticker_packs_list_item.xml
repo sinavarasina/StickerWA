@@ -1,132 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/sticker_store_row_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginBottom="6dp"
+    android:layout_margin="7dp"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground"
+    android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="?attr/colorCardSurface"
-    app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="@dimen/card_elevation"
-    app:strokeColor="?attr/colorCardBorder"
-    app:strokeWidth="@dimen/card_stroke_width">
+    app:cardCornerRadius="24dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp">
+        android:orientation="vertical"
+        android:padding="14dp">
 
+        <!-- Card Top Corner Header (Playing Card Index Style) -->
         <LinearLayout
-            android:id="@+id/sticker_pack_info"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@id/add_button_on_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/sticker_pack_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ellipsize="end"
-                    android:fontFamily="sans-serif-medium"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    tools:text="Pusheen" />
-
-                <ImageView
-                    android:id="@+id/sticker_pack_animation_indicator"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_marginStart="6dp"
-                    android:background="@drawable/badge_pill"
-                    android:contentDescription="@string/sticker_pack_animation_indicator"
-                    android:padding="3dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/animated_pack_indicator"
-                    app:tint="?attr/colorBadgeText"
-                    tools:visibility="visible" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/sticker_pack_filesize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:background="@drawable/badge_pill"
+                android:fontFamily="sans-serif-medium"
+                android:paddingStart="10dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="4dp"
+                android:singleLine="true"
+                android:textColor="?attr/colorBadgeText"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                tools:text="3 • 152 KB" />
 
-                <TextView
-                    android:id="@+id/sticker_pack_publisher"
-                    style="@style/sticker_packs_list_item_author_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxWidth="140dp"
-                    tools:text="petellison" />
+            <ImageView
+                android:id="@+id/sticker_pack_animation_indicator"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:contentDescription="@string/sticker_pack_animation_indicator"
+                android:src="@drawable/animated_pack_indicator"
+                android:visibility="gone"
+                app:tint="?attr/colorPrimary"
+                tools:visibility="visible" />
 
-                <TextView
-                    android:id="@+id/sticker_pack_list_item_dot"
-                    style="@style/sticker_packs_list_item_author_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/sticker_pack_list_item_row_dot_horizontal_padding"
-                    android:paddingEnd="@dimen/sticker_pack_list_item_row_dot_horizontal_padding"
-                    android:text="@string/dot" />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
 
-                <TextView
-                    android:id="@+id/sticker_pack_filesize"
-                    style="@style/sticker_packs_list_item_author_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="700 KB" />
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/add_button_on_list"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@drawable/btn_circle_tonal"
+                android:contentDescription="@string/add_button_content_description"
+                android:padding="7dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/sticker_3rdparty_add"
+                app:tint="?attr/colorAddButtonIcon" />
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/add_button_on_list"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:background="@drawable/btn_circle_tonal"
-            android:contentDescription="@string/add_button_content_description"
-            android:padding="10dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/sticker_3rdparty_add"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/sticker_packs_list_item_image_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <!-- Portrait Card Center Artwork (Tray Icon) -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="148dp"
             android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sticker_pack_info" />
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_preview_stage"
+            android:padding="16dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/sticker_pack_tray_icon"
+                android:layout_width="112dp"
+                android:layout_height="112dp"
+                android:layout_gravity="center"
+                fresco:actualImageScaleType="fitCenter" />
+
+        </FrameLayout>
+
+        <!-- Card Bottom Footer: Ping-Pong Scrolling Pack Title & Publisher -->
+        <id.my.sinanonym.stickerwa.ui.widget.PingPongTextView
+            android:id="@+id/sticker_pack_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Faiq Kecoa Edisi Spesial Panjang" />
+
+        <TextView
+            android:id="@+id/sticker_pack_publisher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp"
+            tools:text="sinanonym" />
+
+    </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

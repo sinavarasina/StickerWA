@@ -1,47 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<!-- Content description for the sticker pack tray image -->
-	<string name="tray_image_content_description">Gambar Baki Paket Stiker</string>
-	<!-- the title of info button in the menu that takes the user to more information about that pack showing publisher website and so on -->
-	<string name="more_info_button">Info selengkapnya tentang paket stiker</string>
-	<!-- Text to be shown on the button that user can click to add the sticker pack to WhatsApp -->
-	<string name="add_to_whatsapp">Tambah ke WhatsApp</string>
-	<!-- Content Description for the plus button shown on sticker pack list, that allows user to add sticker pack to WhatsApp -->
-	<string name="add_button_content_description">Tambah paket stiker ke WhatsApp</string>
-	<!-- Title of the sticker pack page when there are multiple sticker packs in the app -->
-	<string name="title_activity_sticker_pack_details_multiple_pack">Detail stiker</string>
-	<!-- Title of the sticker pack info page which displays the webpage, email and privacy policy of the sticker pack -->
-	<string name="title_activity_sticker_pack_info">Info</string>
-	<!-- Text of button that allows user to click to go to the webpage of the publisher -->
-	<string name="view_webpage">Lihat halaman web</string>
-	<!-- Text of button that allows user to click to send an email -->
-	<string name="send_email">Kirim email</string>
-	<!-- Text of button that allows user to click to go to the privacy policy website -->
-	<string name="privacy_policy">Kebijakan privasi</string>
-	<!-- Text next to the tray icon that indicates the tray icon -->
-	<string name="info_screen_tray_icon">Ikon baki</string>
-	<!-- Text shown to the user instead of Add to WhatsApp button if the pack is already added to WhatsApp -->
-	<string name="details_pack_already_added">Paket stiker telah ditambah ke WhatsApp</string>
-	<!-- Title in the intent chooser that shows when user has multiple email client installed -->
-	<string name="info_send_email_to_prompt">Kirim email dengan</string>
-	<!-- Message to show in a dialog when user fails to add sticker pack -->
-	<string name="add_pack_fail_prompt_update_whatsapp">Paket stiker belum ditambahkan. Jika ingin menambah, pastikan Anda memperbarui ke versi WhatsApp terbaru.</string>
-	<!-- Text in dialog button when a user has an old version of WhatsApp that prevents them from adding the sticker pack, clicking on it will take user to play store -->
-	<string name="add_pack_fail_prompt_update_play_link">Perbarui</string>
-	<!-- Toast text when we could not take user to play store because they don't have Google Play app installed -->
-	<string name="cannot_find_play_store">Google Play tidak terpasang di perangkat.</string>
-	<!-- Text of button that allows user to click to go to the license agreement website -->
-	<string name="license_agreement">Perjanjian lisensi</string>
-	<!-- Title of the sticker pack list activity page in case the app contains multiple sticker packs, the singular string will be used when there is only one pack in the app -->
-	<plurals name="title_activity_sticker_packs_list">
-		<item quantity="other">Paket Stiker</item>
-	</plurals>
-	<!-- Content description indicating the sticker pack is an animated pack -->
-	<string name="sticker_pack_animation_indicator">Paket stiker animasi</string>
-	<!-- text we display at the end of sticker pack details page showing that users can tap sticker to see bigger version -->
-	<string name="sticker_pack_details_tap_to_preview">Ketuk untuk melihat pratinjau stiker</string>
-	<!-- Theme & Palette selection strings -->
-	<string name="action_theme">Tema &amp; Palet</string>
-	<string name="theme_dialog_title">Pilih Tema &amp; Palet</string>
-	<string name="badge_animated">ANIMASI</string>
+    <string name="title_main_screen">Sticker WA</string>
+    <string name="tray_image_content_description">Gambar Baki Paket Stiker</string>
+    <string name="more_info_button">Info selengkapnya tentang paket stiker</string>
+    <string name="add_to_whatsapp">Tambah ke WhatsApp</string>
+    <string name="add_button_content_description">Tambah paket stiker ke WhatsApp</string>
+    <string name="title_activity_sticker_pack_details_multiple_pack">Detail stiker</string>
+    <string name="title_activity_sticker_pack_info">Info</string>
+    <string name="view_webpage">Lihat halaman web</string>
+    <string name="send_email">Kirim email</string>
+    <string name="privacy_policy">Kebijakan privasi</string>
+    <string name="info_screen_tray_icon">Ikon baki</string>
+    <string name="details_pack_already_added">Terpasang</string>
+    <string name="info_send_email_to_prompt">Kirim email dengan</string>
+    <string name="add_pack_fail_prompt_update_whatsapp">Paket stiker belum ditambahkan. Jika ingin menambah, pastikan Anda memperbarui ke versi WhatsApp terbaru.</string>
+    <string name="add_pack_fail_prompt_update_play_link">Perbarui</string>
+    <string name="cannot_find_play_store">Google Play tidak terpasang di perangkat.</string>
+    <string name="license_agreement">Perjanjian lisensi</string>
+    <plurals name="title_activity_sticker_packs_list">
+        <item quantity="other">Paket Stiker</item>
+    </plurals>
+    <string name="sticker_pack_animation_indicator">Paket stiker animasi</string>
+    <string name="sticker_pack_details_tap_to_preview">Ketuk untuk melihat pratinjau stiker</string>
+    <string name="action_theme">Tema &amp; Palet</string>
+    <string name="theme_dialog_title">Pilih Tema &amp; Palet</string>
+    <string name="badge_animated">ANIMASI</string>
+
+    <!-- Portrait Card & Floating Card Strings -->
+    <string name="floating_card_subtitle_format">%1$s • %2$d Stiker • %3$s</string>
+    <string name="save_sticker_button">Simpan</string>
+    <string name="add_pack_short_button">WhatsApp</string>
+    <string name="sticker_saved_success">Stiker disimpan ke %1$s</string>
+    <string name="sticker_saved_failed">Gagal menyimpan stiker: %1$s</string>
+
+    <!-- Settings Screen Strings -->
+    <string name="settings_title">Pengaturan</string>
+    <string name="settings_theme_mode_title">Mode Tema</string>
+    <string name="settings_theme_mode_subtitle">Pilih mode tampilan mengikuti sistem, terang, atau gelap</string>
+    <string name="theme_mode_system">Ikuti Sistem (Default)</string>
+    <string name="theme_mode_light">Mode Terang (Light)</string>
+    <string name="theme_mode_dark">Mode Gelap (Dark)</string>
+
+    <string name="settings_palette_title">Palet Warna</string>
+    <string name="settings_palette_subtitle">Pilih palet warna flat untuk antarmuka aplikasi</string>
+    <string name="settings_build_info_title">Build Information</string>
+    <string name="settings_build_info_subtitle">Detail teknis paket aplikasi yang terpasang</string>
+    <string name="build_info_version_format">Versi APK: %1$s (Code %2$d)</string>
+    <string name="build_info_package_format">Package ID: %1$s</string>
+    <string name="build_info_type_format">Tipe Build: %1$s</string>
+    <string name="build_info_time_format">Waktu Build: %1$s</string>
+    <string name="build_info_arch_format">Arsitektur (ABI): %1$s</string>
+    <string name="build_info_sdk_format">Android SDK: API %1$d (Android %2$s)</string>
+    <string name="build_info_packs_format">Total Koleksi: %1$d Pack (%2$d Stiker)</string>
 </resources>

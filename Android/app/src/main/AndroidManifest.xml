@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+
     <application
         android:name=".StickerApplication"
         android:allowBackup="false"
@@ -12,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.entry.EntryActivity">
+        <activity
+            android:name=".ui.entry.EntryActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -35,6 +41,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="id.my.sinanonym.stickerwa.ui.details.StickerPackDetailsActivity" />
+        </activity>
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:label="@string/settings_title"
+            android:parentActivityName=".ui.list.StickerPackListActivity"
+            tools:ignore="UnusedAttribute">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="id.my.sinanonym.stickerwa.ui.list.StickerPackListActivity" />
         </activity>
 
         <provider

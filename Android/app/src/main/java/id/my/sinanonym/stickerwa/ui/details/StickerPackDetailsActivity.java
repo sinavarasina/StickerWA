@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,11 +32,11 @@ import java.util.concurrent.Future;
 
 import id.my.sinanonym.stickerwa.R;
 import id.my.sinanonym.stickerwa.core.AppExecutors;
-import id.my.sinanonym.stickerwa.core.ThemePreferences;
 import id.my.sinanonym.stickerwa.data.StickerRepository;
 import id.my.sinanonym.stickerwa.data.model.StickerPack;
 import id.my.sinanonym.stickerwa.ui.base.BaseActivity;
 import id.my.sinanonym.stickerwa.ui.info.StickerPackInfoActivity;
+import id.my.sinanonym.stickerwa.ui.settings.SettingsActivity;
 import id.my.sinanonym.stickerwa.whatsapp.WhatsAppStickerLauncher;
 import id.my.sinanonym.stickerwa.whatsapp.WhitelistCheck;
 
@@ -71,6 +72,11 @@ public class StickerPackDetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sticker_pack_details);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        }
         boolean showUpButton = getIntent().getBooleanExtra(EXTRA_SHOW_UP_BUTTON, false);
         stickerPack = getIntent().getParcelableExtra(EXTRA_STICKER_PACK_DATA);
         TextView packNameTextView = findViewById(R.id.pack_name);
@@ -137,8 +143,8 @@ public class StickerPackDetailsActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_theme) {
-            ThemePreferences.showThemeDialog(this);
+        if (item.getItemId() == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
         if (item.getItemId() == R.id.action_info && stickerPack != null) {

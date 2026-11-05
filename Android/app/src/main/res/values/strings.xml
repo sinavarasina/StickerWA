@@ -1,49 +1,61 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- This is the app's name, translators please do not translate and put in the same text as English version. Developers can consider putting in their own translation, this string must be changed before publishing -->
     <string name="app_name">StickerWA</string>
-    <!-- Content description for the sticker pack tray image -->
+    <string name="title_main_screen">Sticker WA</string>
     <string name="tray_image_content_description">Sticker Pack Tray Image</string>
-    <!-- the title of info button in the menu that takes the user to more information about that pack showing publisher website and so on -->
     <string name="more_info_button">More info about sticker pack</string>
-    <!-- Text to be shown on the button that user can click to add the sticker pack to WhatsApp -->
     <string name="add_to_whatsapp">Add to WhatsApp</string>
-    <!-- Content Description for the plus button shown on sticker pack list, that allows user to add sticker pack to WhatsApp -->
     <string name="add_button_content_description">Add sticker pack to WhatsApp</string>
-    <!-- Title of the sticker pack list activity page in case the app contains multiple sticker packs, the singular string will be used when there is only one pack in the app -->
     <plurals name="title_activity_sticker_packs_list">
         <item quantity="one">Sticker Pack</item>
         <item quantity="other">Sticker Packs</item>
     </plurals>
-    <!-- Title of the sticker pack page when there are multiple sticker packs in the app -->
     <string name="title_activity_sticker_pack_details_multiple_pack">Sticker details</string>
-    <!-- Title of the sticker pack info page which displays the webpage, email and privacy policy of the sticker pack -->
     <string name="title_activity_sticker_pack_info">Info</string>
-    <!-- Text of button that allows user to click to go to the webpage of the publisher -->
     <string name="view_webpage">View webpage</string>
-    <!-- Text of button that allows user to click to send an email -->
     <string name="send_email">Send email</string>
-    <!-- Text of button that allows user to click to go to the privacy policy website -->
     <string name="privacy_policy">Privacy policy</string>
-    <!-- Text of button that allows user to click to go to the license agreement website -->
     <string name="license_agreement">License agreement</string>
-    <!-- Text next to the tray icon that indicates the tray icon -->
     <string name="info_screen_tray_icon">Tray icon</string>
-    <!-- Text shown to the user instead of Add to WhatsApp button if the pack is already added to WhatsApp -->
-    <string name="details_pack_already_added">Sticker pack added to WhatsApp</string>
-    <!-- Title in the intent chooser that shows when user has multiple email client installed -->
+    <string name="details_pack_already_added">Added</string>
     <string name="info_send_email_to_prompt">Send email with</string>
-    <!-- Message to show in a dialog when user fails to add sticker pack -->
     <string name="add_pack_fail_prompt_update_whatsapp">Sticker pack not added. If you\'d like to add it, make sure you update to the latest version of WhatsApp.</string>
-    <!-- Text in dialog button when a user has an old version of WhatsApp that prevents them from adding the sticker pack, clicking on it will take user to play store -->
     <string name="add_pack_fail_prompt_update_play_link">Update</string>
-    <!-- Toast text when we could not take user to play store because they don't have Google Play app installed -->
     <string name="cannot_find_play_store">Google Play is not installed on the device.</string>
-    <!-- Content description indicating the sticker pack is an animated pack -->
     <string name="sticker_pack_animation_indicator" tools:ignore="MissingTranslation">Animated sticker pack</string>
-    <!-- text we display at the end of sticker pack details page showing that users can tap sticker to see bigger version -->
     <string name="sticker_pack_details_tap_to_preview" tools:ignore="MissingTranslation">Tap to preview sticker</string>
-    <!-- Theme & Palette selection strings -->
     <string name="action_theme">Theme &amp; Palette</string>
     <string name="theme_dialog_title">Theme &amp; Palette</string>
     <string name="badge_animated">ANIMATED</string>
+
+    <!-- Portrait Card & Floating Card Strings -->
+    <string name="card_badge_count_size_format" translatable="false">%1$d • %2$s</string>
+    <string name="floating_card_subtitle_format">%1$s • %2$d Stickers • %3$s</string>
+    <string name="save_sticker_button">Save</string>
+    <string name="add_pack_short_button">WhatsApp</string>
+    <string name="sticker_saved_success">Sticker saved to %1$s</string>
+    <string name="sticker_saved_failed">Failed to save sticker: %1$s</string>
+
+    <!-- Settings Screen Strings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_theme_mode_title">Theme Mode</string>
+    <string name="settings_theme_mode_subtitle">Choose system default, light, or dark mode</string>
+    <string name="theme_mode_system">Follow System (Default)</string>
+    <string name="theme_mode_light">Light Mode</string>
+    <string name="theme_mode_dark">Dark Mode</string>
+
+    <string name="settings_palette_title">Color Palette</string>
+    <string name="settings_palette_subtitle">Choose the flat color palette for the interface</string>
+    <string name="palette_catppuccin_label" translatable="false">Catppuccin (Latte / Mocha)</string>
+    <string name="palette_gruvbox_label" translatable="false">Gruvbox (Light / Dark)</string>
+    <string name="palette_monet_label" translatable="false">Monet (Dynamic Color)</string>
+
+    <string name="settings_build_info_title">Build Information</string>
+    <string name="settings_build_info_subtitle">Technical details of the installed build</string>
+    <string name="build_info_version_format">Version: %1$s (Code %2$d)</string>
+    <string name="build_info_package_format">Package ID: %1$s</string>
+    <string name="build_info_type_format">Build Type: %1$s</string>
+    <string name="build_info_time_format">Build Time: %1$s</string>
+    <string name="build_info_arch_format">Architecture (ABI): %1$s</string>
+    <string name="build_info_sdk_format">Android SDK: API %1$d (Android %2$s)</string>
+    <string name="build_info_packs_format">Sticker Collection: %1$d Packs (%2$d Stickers)</string>
 </resources>

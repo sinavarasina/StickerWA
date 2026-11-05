@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- System Dynamic Monet Colors (Light) API 31+ -->
+    <color name="monet_primary">@android:color/system_accent1_600</color>
+    <color name="monet_primary_variant">@android:color/system_accent1_700</color>
+    <color name="monet_on_primary">#FFFFFF</color>
+    <color name="monet_secondary">@android:color/system_accent2_600</color>
+    <color name="monet_on_secondary">#FFFFFF</color>
+    <color name="monet_bg">@android:color/system_neutral1_10</color>
+    <color name="monet_surface">@android:color/system_neutral1_100</color>
+    <color name="monet_surface_variant">@android:color/system_neutral2_100</color>
+    <color name="monet_card_surface">#FFFFFF</color>
+    <color name="monet_card_border">@android:color/system_neutral2_200</color>
+    <color name="monet_text">@android:color/system_neutral1_900</color>
+    <color name="monet_subtext">@android:color/system_neutral2_700</color>
+</resources>

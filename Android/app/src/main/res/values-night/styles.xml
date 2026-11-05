@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Catppuccin Theme (Dark: Mocha) -->
-    <style name="Base.AppTheme.Catppuccin" parent="Theme.MaterialComponents.DayNight">
+    <style name="Base.AppTheme.Catppuccin" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/catppuccin_mocha_mauve</item>
         <item name="colorPrimaryVariant">@color/catppuccin_mocha_mauve</item>
         <item name="colorOnPrimary">@color/catppuccin_mocha_base</item>
@@ -33,7 +33,7 @@
     <style name="AppTheme.Catppuccin" parent="Base.AppTheme.Catppuccin" />
 
     <!-- Gruvbox Theme (Dark: Gruvbox Dark) -->
-    <style name="Base.AppTheme.Gruvbox" parent="Theme.MaterialComponents.DayNight">
+    <style name="Base.AppTheme.Gruvbox" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/gruvbox_dark_primary</item>
         <item name="colorPrimaryVariant">@color/gruvbox_dark_primary</item>
         <item name="colorOnPrimary">@color/gruvbox_dark_bg_hard</item>
@@ -63,5 +63,37 @@
         <item name="actionBarTheme">@style/MyApp.ActionBarTheme</item>
     </style>
     <style name="AppTheme.Gruvbox" parent="Base.AppTheme.Gruvbox" />
+
+    <!-- Monet Dynamic / Material Theme (Dark) -->
+    <style name="Base.AppTheme.Monet" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/monet_primary</item>
+        <item name="colorPrimaryVariant">@color/monet_primary_variant</item>
+        <item name="colorOnPrimary">@color/monet_on_primary</item>
+        <item name="colorSecondary">@color/monet_secondary</item>
+        <item name="colorOnSecondary">@color/monet_on_secondary</item>
+        <item name="colorAccent">@color/monet_primary</item>
+
+        <item name="android:windowBackground">@color/monet_bg</item>
+        <item name="colorSurface">@color/monet_surface</item>
+        <item name="colorOnSurface">@color/monet_text</item>
+        <item name="android:textColorPrimary">@color/monet_text</item>
+        <item name="android:textColorSecondary">@color/monet_subtext</item>
+
+        <!-- Custom Material UI Palette Attributes -->
+        <item name="colorCardSurface">@color/monet_card_surface</item>
+        <item name="colorCardBorder">@color/monet_card_border</item>
+        <item name="colorBadgeBackground">@color/monet_surface_variant</item>
+        <item name="colorBadgeText">@color/monet_primary</item>
+        <item name="colorDivider">@color/monet_card_border</item>
+        <item name="colorAddButtonBackground">@color/monet_surface_variant</item>
+        <item name="colorAddButtonIcon">@color/monet_primary</item>
+        <item name="colorAddedButtonBackground">@color/monet_surface_variant</item>
+        <item name="colorAddedButtonIcon">@color/monet_secondary</item>
+        <item name="colorSurfaceVariant">@color/monet_surface_variant</item>
+
+        <item name="actionBarStyle">@style/MyApp.ActionBar</item>
+        <item name="actionBarTheme">@style/MyApp.ActionBarTheme</item>
+    </style>
+    <style name="AppTheme.Monet" parent="Base.AppTheme.Monet" />
 
 </resources>

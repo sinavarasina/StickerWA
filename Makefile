@@ -144,7 +144,12 @@ errors: device ## Show important Android and StickerWA runtime errors
 		'AndroidRuntime|FATAL EXCEPTION|StickerWA|Sticker|Fresco|WhatsApp'
 
 clear-app: device ## Clear local application data on the device
-	@$(ADB_DEVICE) shell pm clear "$(APP_ID)"
+	@if $(ADB_DEVICE) shell pm list packages "$(APP_ID)" | grep -q "$(APP_ID)"; then \
+		$(ADB_DEVICE) shell pm clear "$(APP_ID)"; \
+		echo "OK [CLEAR] Cleared data for $(APP_ID)"; \
+	else \
+		echo "OK [CLEAR] $(APP_ID) is not installed yet, skipping clear"; \
+	fi
 
 reinstall: clear-app install run ## Clear app data, reinstall, and launch
 

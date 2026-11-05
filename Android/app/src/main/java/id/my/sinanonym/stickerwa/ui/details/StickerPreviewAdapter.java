@@ -27,7 +27,7 @@ import id.my.sinanonym.stickerwa.data.model.StickerPack;
 public class StickerPreviewAdapter extends RecyclerView.Adapter<StickerPreviewAdapter.ViewHolder> {
 
     private static final float COLLAPSED_STICKER_PREVIEW_BACKGROUND_ALPHA = 1f;
-    private static final float EXPANDED_STICKER_PREVIEW_BACKGROUND_ALPHA = 0.2f;
+    private static final float EXPANDED_STICKER_PREVIEW_BACKGROUND_ALPHA = 1f;
 
     @NonNull
     private final StickerPack stickerPack;
