@@ -1,0 +1,65 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Catppuccin Theme (Dark: Mocha) -->
+    <style name="AppTheme.Catppuccin" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">@color/catppuccin_mocha_mauve</item>
+        <item name="colorPrimaryVariant">@color/catppuccin_mocha_mauve</item>
+        <item name="colorOnPrimary">@color/catppuccin_mocha_base</item>
+        <item name="colorSecondary">@color/catppuccin_mocha_green</item>
+        <item name="colorOnSecondary">@color/catppuccin_mocha_base</item>
+        <item name="colorAccent">@color/catppuccin_mocha_mauve</item>
+
+        <item name="android:windowBackground">@color/catppuccin_mocha_base</item>
+        <item name="colorSurface">@color/catppuccin_mocha_mantle</item>
+        <item name="colorOnSurface">@color/catppuccin_mocha_text</item>
+        <item name="android:textColorPrimary">@color/catppuccin_mocha_text</item>
+        <item name="android:textColorSecondary">@color/catppuccin_mocha_subtext0</item>
+
+        <!-- Custom Material UI Palette Attributes -->
+        <item name="colorCardSurface">@color/catppuccin_mocha_surface0</item>
+        <item name="colorCardBorder">@color/catppuccin_mocha_surface1</item>
+        <item name="colorBadgeBackground">@color/catppuccin_mocha_surface1</item>
+        <item name="colorBadgeText">@color/catppuccin_mocha_mauve</item>
+        <item name="colorDivider">@color/catppuccin_mocha_surface1</item>
+        <item name="colorAddButtonBackground">@color/catppuccin_mocha_surface1</item>
+        <item name="colorAddButtonIcon">@color/catppuccin_mocha_mauve</item>
+        <item name="colorAddedButtonBackground">@color/catppuccin_mocha_surface1</item>
+        <item name="colorAddedButtonIcon">@color/catppuccin_mocha_green</item>
+        <item name="colorSurfaceVariant">@color/catppuccin_mocha_surface1</item>
+
+        <item name="actionBarStyle">@style/MyApp.ActionBar</item>
+        <item name="actionBarTheme">@style/MyApp.ActionBarTheme</item>
+    </style>
+
+    <!-- Gruvbox Theme (Dark: Gruvbox Dark) -->
+    <style name="AppTheme.Gruvbox" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">@color/gruvbox_dark_primary</item>
+        <item name="colorPrimaryVariant">@color/gruvbox_dark_primary</item>
+        <item name="colorOnPrimary">@color/gruvbox_dark_bg_hard</item>
+        <item name="colorSecondary">@color/gruvbox_dark_secondary</item>
+        <item name="colorOnSecondary">@color/gruvbox_dark_bg_hard</item>
+        <item name="colorAccent">@color/gruvbox_dark_primary</item>
+
+        <item name="android:windowBackground">@color/gruvbox_dark_bg_hard</item>
+        <item name="colorSurface">@color/gruvbox_dark_bg</item>
+        <item name="colorOnSurface">@color/gruvbox_dark_on_bg</item>
+        <item name="android:textColorPrimary">@color/gruvbox_dark_on_bg</item>
+        <item name="android:textColorSecondary">@color/gruvbox_dark_on_surface_variant</item>
+
+        <!-- Custom Material UI Palette Attributes -->
+        <item name="colorCardSurface">@color/gruvbox_dark_surface</item>
+        <item name="colorCardBorder">@color/gruvbox_dark_surface_variant</item>
+        <item name="colorBadgeBackground">@color/gruvbox_dark_surface_variant</item>
+        <item name="colorBadgeText">@color/gruvbox_dark_primary</item>
+        <item name="colorDivider">@color/gruvbox_dark_surface_variant</item>
+        <item name="colorAddButtonBackground">@color/gruvbox_dark_surface_variant</item>
+        <item name="colorAddButtonIcon">@color/gruvbox_dark_primary</item>
+        <item name="colorAddedButtonBackground">@color/gruvbox_dark_surface_variant</item>
+        <item name="colorAddedButtonIcon">@color/gruvbox_dark_secondary</item>
+        <item name="colorSurfaceVariant">@color/gruvbox_dark_surface_variant</item>
+
+        <item name="actionBarStyle">@style/MyApp.ActionBar</item>
+        <item name="actionBarTheme">@style/MyApp.ActionBarTheme</item>
+    </style>
+
+</resources>

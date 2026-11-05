@@ -17,6 +17,7 @@ public class StickerApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ThemePreferences.initNightMode(this);
         Fresco.initialize(this);
     }
 }

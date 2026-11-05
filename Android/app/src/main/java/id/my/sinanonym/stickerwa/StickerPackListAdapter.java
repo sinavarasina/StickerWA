@@ -86,13 +86,11 @@ public class StickerPackListAdapter extends RecyclerView.Adapter<StickerPackList
             addButton.setImageResource(R.drawable.sticker_3rdparty_added);
             addButton.setClickable(false);
             addButton.setOnClickListener(null);
-            setBackground(addButton, null);
+            addButton.setBackgroundResource(R.drawable.btn_circle_tonal);
         } else {
             addButton.setImageResource(R.drawable.sticker_3rdparty_add);
             addButton.setOnClickListener(v -> onAddButtonClickedListener.onAddButtonClicked(pack));
-            TypedValue outValue = new TypedValue();
-            addButton.getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
-            addButton.setBackgroundResource(outValue.resourceId);
+            addButton.setBackgroundResource(R.drawable.btn_circle_tonal);
         }
     }
 

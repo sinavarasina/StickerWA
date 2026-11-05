@@ -7,12 +7,30 @@
         android:id="@+id/error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:padding="24dp"
         android:textColor="@android:color/holo_red_dark" />
 
-    <ProgressBar
+    <LinearLayout
         android:id="@+id/entry_activity_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:contentDescription="@string/app_name"
+            android:src="@mipmap/ic_launcher" />
+
+        <ProgressBar
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="24dp"
+            android:indeterminate="true"
+            android:indeterminateTint="?attr/colorPrimary" />
+
+    </LinearLayout>
+
 </FrameLayout>

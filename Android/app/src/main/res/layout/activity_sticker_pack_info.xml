@@ -1,55 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/infoPageBackgroundColor"
-    android:orientation="vertical"
-    android:paddingTop="8dp"
+    android:fillViewport="true"
     tools:context=".StickerPackInfoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp">
 
-        <TextView
-            android:id="@+id/tray_icon"
-            style="@style/InfoButtonStyle"
-            android:clickable="false"
-            android:text="@string/info_screen_tray_icon"
-            android:textColor="#B9B9B9"
-            tools:drawableLeft="@drawable/sticker_3rdparty_web"
-            tools:drawableStart="@drawable/sticker_3rdparty_web" />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="?attr/colorCardSurface"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
+            app:strokeColor="?attr/colorCardBorder"
+            app:strokeWidth="@dimen/card_stroke_width">
 
-        <TextView
-            android:id="@+id/view_webpage"
-            style="@style/InfoButtonStyle"
-            android:drawableStart="@drawable/sticker_3rdparty_web"
-            android:drawableLeft="@drawable/sticker_3rdparty_web"
-            android:text="@string/view_webpage" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/send_email"
-            style="@style/InfoButtonStyle"
-            android:drawableStart="@drawable/sticker_3rdparty_email"
-            android:drawableLeft="@drawable/sticker_3rdparty_email"
-            android:text="@string/send_email" />
+                <TextView
+                    android:id="@+id/tray_icon"
+                    style="@style/InfoButtonStyle"
+                    android:clickable="false"
+                    android:text="@string/info_screen_tray_icon"
+                    android:textColor="?android:attr/textColorSecondary"
+                    tools:drawableStart="@drawable/sticker_3rdparty_web" />
 
-        <TextView
-            android:id="@+id/privacy_policy"
-            style="@style/InfoButtonStyle"
-            android:drawableStart="@drawable/sticker_3rdparty_privacy"
-            android:drawableLeft="@drawable/sticker_3rdparty_privacy"
-            android:text="@string/privacy_policy" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/colorDivider" />
 
-        <TextView
-            android:id="@+id/license_agreement"
-            style="@style/InfoButtonStyle"
-            android:drawableStart="@drawable/sticker_3rdparty_license"
-            android:drawableLeft="@drawable/sticker_3rdparty_license"
-            android:text="@string/license_agreement" />
+                <TextView
+                    android:id="@+id/view_webpage"
+                    style="@style/InfoButtonStyle"
+                    android:drawableStart="@drawable/sticker_3rdparty_web"
+                    android:drawableLeft="@drawable/sticker_3rdparty_web"
+                    android:drawableEnd="@drawable/ic_chevron_right"
+                    android:drawableRight="@drawable/ic_chevron_right"
+                    android:text="@string/view_webpage" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/colorDivider" />
+
+                <TextView
+                    android:id="@+id/send_email"
+                    style="@style/InfoButtonStyle"
+                    android:drawableStart="@drawable/sticker_3rdparty_email"
+                    android:drawableLeft="@drawable/sticker_3rdparty_email"
+                    android:drawableEnd="@drawable/ic_chevron_right"
+                    android:drawableRight="@drawable/ic_chevron_right"
+                    android:text="@string/send_email" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/colorDivider" />
+
+                <TextView
+                    android:id="@+id/privacy_policy"
+                    style="@style/InfoButtonStyle"
+                    android:drawableStart="@drawable/sticker_3rdparty_privacy"
+                    android:drawableLeft="@drawable/sticker_3rdparty_privacy"
+                    android:drawableEnd="@drawable/ic_chevron_right"
+                    android:drawableRight="@drawable/ic_chevron_right"
+                    android:text="@string/privacy_policy" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/colorDivider" />
+
+                <TextView
+                    android:id="@+id/license_agreement"
+                    style="@style/InfoButtonStyle"
+                    android:drawableStart="@drawable/sticker_3rdparty_license"
+                    android:drawableLeft="@drawable/sticker_3rdparty_license"
+                    android:drawableEnd="@drawable/ic_chevron_right"
+                    android:drawableRight="@drawable/ic_chevron_right"
+                    android:text="@string/license_agreement" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
-</LinearLayout>
+
+</ScrollView>

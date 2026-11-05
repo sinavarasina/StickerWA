@@ -112,6 +112,10 @@ public class StickerPackDetailsActivity extends AddStickerPackActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_theme) {
+            ThemePreferences.showThemeDialog(this);
+            return true;
+        }
         if (item.getItemId() == R.id.action_info && stickerPack != null) {
             Uri trayIconUri = StickerPackLoader.getStickerAssetUri(stickerPack.identifier, stickerPack.trayImageFile);
             launchInfoActivity(stickerPack.publisherWebsite, stickerPack.publisherEmail, stickerPack.privacyPolicyWebsite, stickerPack.licenseAgreementWebsite, trayIconUri.toString());

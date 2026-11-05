@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Catppuccin Latte (Light) -->
+    <color name="catppuccin_latte_rosewater">#DC8A78</color>
+    <color name="catppuccin_latte_flamingo">#DD7878</color>
+    <color name="catppuccin_latte_pink">#EA76CB</color>
+    <color name="catppuccin_latte_mauve">#8839EF</color>
+    <color name="catppuccin_latte_red">#D20F39</color>
+    <color name="catppuccin_latte_maroon">#E64553</color>
+    <color name="catppuccin_latte_peach">#FE640B</color>
+    <color name="catppuccin_latte_yellow">#DF8E1D</color>
+    <color name="catppuccin_latte_green">#40A02B</color>
+    <color name="catppuccin_latte_teal">#179299</color>
+    <color name="catppuccin_latte_sky">#04A5E5</color>
+    <color name="catppuccin_latte_sapphire">#209FB5</color>
+    <color name="catppuccin_latte_blue">#1E66F5</color>
+    <color name="catppuccin_latte_lavender">#7287FD</color>
+
+    <color name="catppuccin_latte_text">#4C4F69</color>
+    <color name="catppuccin_latte_subtext1">#5C5F77</color>
+    <color name="catppuccin_latte_subtext0">#6C6F85</color>
+    <color name="catppuccin_latte_overlay2">#7C7F93</color>
+    <color name="catppuccin_latte_overlay1">#8C8FA1</color>
+    <color name="catppuccin_latte_overlay0">#9CA0B0</color>
+    <color name="catppuccin_latte_surface2">#ACB0BE</color>
+    <color name="catppuccin_latte_surface1">#BCC0CC</color>
+    <color name="catppuccin_latte_surface0">#CCD0DA</color>
+    <color name="catppuccin_latte_base">#EFF1F5</color>
+    <color name="catppuccin_latte_mantle">#E6E9EF</color>
+    <color name="catppuccin_latte_crust">#DCE0E8</color>
+</resources>

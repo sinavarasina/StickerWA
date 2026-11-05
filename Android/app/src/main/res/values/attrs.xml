@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorCardSurface" format="color" />
+    <attr name="colorCardBorder" format="color" />
+    <attr name="colorBadgeBackground" format="color" />
+    <attr name="colorBadgeText" format="color" />
+    <attr name="colorDivider" format="color" />
+    <attr name="colorAddButtonBackground" format="color" />
+    <attr name="colorAddButtonIcon" format="color" />
+    <attr name="colorAddedButtonBackground" format="color" />
+    <attr name="colorAddedButtonIcon" format="color" />
+    <attr name="colorSurfaceVariant" format="color" />
+</resources>

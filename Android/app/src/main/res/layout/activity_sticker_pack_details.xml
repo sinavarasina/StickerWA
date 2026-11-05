@@ -4,82 +4,121 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="@dimen/preview_side_margin"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- Modern Expressive Header Card -->
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/preview_side_margin"
-        android:layout_marginLeft="@dimen/preview_side_margin"
         android:layout_marginEnd="@dimen/preview_side_margin"
-        android:layout_marginRight="@dimen/preview_side_margin"
-        android:layout_marginBottom="24dp">
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="?attr/colorCardSurface"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:strokeColor="?attr/colorCardBorder"
+        app:strokeWidth="@dimen/card_stroke_width">
 
-
-        <ImageView
-            android:id="@+id/tray_image"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@string/tray_image_content_description"
-            android:src="@color/colorAccent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@color/colorAccent" />
-
-        <TextView
-            android:id="@+id/pack_name"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_from_tray_to_name"
-            android:layout_marginLeft="@dimen/margin_from_tray_to_name"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/tray_image"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Pack Name" />
+            android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/sticker_pack_animation_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:contentDescription="@string/sticker_pack_animation_indicator"
-            android:src="@drawable/animated_pack_indicator"
-            app:layout_constraintBottom_toBottomOf="@+id/pack_name"
-            app:layout_constraintStart_toEndOf="@+id/pack_name"
-            app:layout_constraintTop_toTopOf="@+id/pack_name"
-            app:tint="@color/animatedStickerIndicator" />
+            <ImageView
+                android:id="@+id/tray_image"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:contentDescription="@string/tray_image_content_description"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@color/colorAccent" />
 
-        <TextView
-            android:id="@+id/author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_from_tray_to_name"
-            android:layout_marginLeft="@dimen/margin_from_tray_to_name"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toEndOf="@+id/tray_image"
-            app:layout_constraintTop_toBottomOf="@+id/pack_name"
-            tools:text="Author" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tray_image"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/pack_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_from_tray_to_name"
-            android:layout_marginLeft="@dimen/margin_from_tray_to_name"
-            app:layout_constraintStart_toEndOf="@+id/tray_image"
-            app:layout_constraintTop_toBottomOf="@+id/author"
-            tools:text="Size" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/pack_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif-medium"
+                        android:maxLines="1"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="Pack Name" />
+
+                    <ImageView
+                        android:id="@+id/sticker_pack_animation_indicator"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/badge_pill"
+                        android:contentDescription="@string/sticker_pack_animation_indicator"
+                        android:padding="3dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/animated_pack_indicator"
+                        app:tint="?attr/colorBadgeText"
+                        tools:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="13sp"
+                        tools:text="Author" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="6dp"
+                        android:paddingEnd="6dp"
+                        android:text="@string/dot"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/pack_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="13sp"
+                        tools:text="700 KB" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -93,9 +132,8 @@
             android:clipToPadding="false"
             android:fadingEdgeLength="@dimen/fading_edge_length"
             android:paddingStart="@dimen/preview_side_margin"
-            android:paddingLeft="@dimen/preview_side_margin"
             android:paddingEnd="@dimen/preview_side_margin"
-            android:paddingRight="@dimen/preview_side_margin"
+            android:paddingBottom="16dp"
             android:requiresFadingEdge="vertical" />
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -109,76 +147,75 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:alpha="0.1"
-            android:background="#000000"
+            android:background="?attr/colorDivider"
             android:visibility="invisible"
             tools:visibility="visible" />
 
     </FrameLayout>
 
-    <FrameLayout
+    <!-- Bottom Sticky Action Bar with Pill Button -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/preview_side_margin"
-        android:layout_marginLeft="@dimen/preview_side_margin"
         android:layout_marginEnd="@dimen/preview_side_margin"
-        android:layout_marginRight="@dimen/preview_side_margin"
-        android:minHeight="60dp">
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/already_added_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="52dp"
+            android:background="@drawable/badge_pill_added"
             android:gravity="center"
+            android:drawableStart="@drawable/ic_check_circle"
+            android:drawableLeft="@drawable/ic_check_circle"
+            android:drawablePadding="8dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:fontFamily="sans-serif-medium"
             android:text="@string/details_pack_already_added"
-            android:textColor="#9B9B9B"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="14sp"
             android:visibility="gone"
             tools:visibility="visible" />
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/add_to_whatsapp_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:id="@+id/add_to_whatsapp_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@drawable/btn_green"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/StickerPreviewButtonText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:drawableStart="@drawable/sticker_3rdparty_wa"
-                    android:drawableLeft="@drawable/sticker_3rdparty_wa"
-                    android:drawablePadding="8dp"
-                    android:focusable="false"
-                    android:foreground="@android:color/transparent"
-                    android:text="@string/add_to_whatsapp" />
-
-
-            </FrameLayout>
+            android:layout_height="52dp"
+            android:background="@drawable/btn_pill_primary"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless">
 
             <TextView
-                android:id="@+id/sticker_pack_details_tap_to_preview"
-                android:layout_width="match_parent"
+                style="@style/StickerPreviewButtonText"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@string/sticker_pack_details_tap_to_preview" />
-        </LinearLayout>
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:drawableStart="@drawable/sticker_3rdparty_wa"
+                android:drawableLeft="@drawable/sticker_3rdparty_wa"
+                android:drawablePadding="10dp"
+                android:focusable="false"
+                android:text="@string/add_to_whatsapp" />
 
+        </FrameLayout>
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/sticker_pack_details_tap_to_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/sticker_pack_details_tap_to_preview"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
 </LinearLayout>

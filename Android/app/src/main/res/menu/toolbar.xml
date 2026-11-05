@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_theme"
+        android:icon="@drawable/ic_palette"
+        android:title="@string/action_theme"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/action_info"
         android:icon="@drawable/sticker_3rdparty_info"
         android:title="@string/more_info_button"

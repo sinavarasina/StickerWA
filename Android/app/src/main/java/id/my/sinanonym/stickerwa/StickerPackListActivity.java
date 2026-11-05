@@ -10,8 +10,9 @@ package id.my.sinanonym.stickerwa;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,16 +59,26 @@ public class StickerPackListActivity extends AddStickerPackActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_theme) {
+            ThemePreferences.showThemeDialog(this);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void showStickerPackList(List<StickerPack> stickerPackList) {
         allStickerPacksListAdapter = new StickerPackListAdapter(stickerPackList, onAddButtonClickedListener);
         packRecyclerView.setAdapter(allStickerPacksListAdapter);
         packLayoutManager = new LinearLayoutManager(this);
         packLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                packRecyclerView.getContext(),
-                packLayoutManager.getOrientation()
-        );
-        packRecyclerView.addItemDecoration(dividerItemDecoration);
         packRecyclerView.setLayoutManager(packLayoutManager);
         packRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(this::recalculateColumnCount);
     }
