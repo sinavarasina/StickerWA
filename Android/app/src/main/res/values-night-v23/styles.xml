@@ -1,11 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="AppTheme.Catppuccin" parent="AppTheme.Catppuccin">
+    <style name="AppTheme.Catppuccin" parent="Base.AppTheme.Catppuccin">
         <item name="android:statusBarColor">?attr/colorSurface</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <style name="AppTheme.Gruvbox" parent="AppTheme.Gruvbox">
+    <style name="AppTheme.Gruvbox" parent="Base.AppTheme.Gruvbox">
         <item name="android:statusBarColor">?attr/colorSurface</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>

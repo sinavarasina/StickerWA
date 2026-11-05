@@ -28,4 +28,33 @@
     <color name="catppuccin_latte_base">#EFF1F5</color>
     <color name="catppuccin_latte_mantle">#E6E9EF</color>
     <color name="catppuccin_latte_crust">#DCE0E8</color>
+
+    <!-- Catppuccin Mocha (Dark) -->
+    <color name="catppuccin_mocha_rosewater">#F5E0DC</color>
+    <color name="catppuccin_mocha_flamingo">#F2CDCD</color>
+    <color name="catppuccin_mocha_pink">#F5C2E7</color>
+    <color name="catppuccin_mocha_mauve">#CBA6F7</color>
+    <color name="catppuccin_mocha_red">#F38BA8</color>
+    <color name="catppuccin_mocha_maroon">#EBA0AC</color>
+    <color name="catppuccin_mocha_peach">#FAB387</color>
+    <color name="catppuccin_mocha_yellow">#F9E2AF</color>
+    <color name="catppuccin_mocha_green">#A6E3A1</color>
+    <color name="catppuccin_mocha_teal">#94E2D5</color>
+    <color name="catppuccin_mocha_sky">#89DCEB</color>
+    <color name="catppuccin_mocha_sapphire">#74C7EC</color>
+    <color name="catppuccin_mocha_blue">#89B4FA</color>
+    <color name="catppuccin_mocha_lavender">#B4BEFE</color>
+
+    <color name="catppuccin_mocha_text">#CDD6F4</color>
+    <color name="catppuccin_mocha_subtext1">#BAC2DE</color>
+    <color name="catppuccin_mocha_subtext0">#A6ADC8</color>
+    <color name="catppuccin_mocha_overlay2">#9399B2</color>
+    <color name="catppuccin_mocha_overlay1">#7F849C</color>
+    <color name="catppuccin_mocha_overlay0">#6C7086</color>
+    <color name="catppuccin_mocha_surface2">#585B70</color>
+    <color name="catppuccin_mocha_surface1">#45475A</color>
+    <color name="catppuccin_mocha_surface0">#313244</color>
+    <color name="catppuccin_mocha_base">#1E1E2E</color>
+    <color name="catppuccin_mocha_mantle">#181825</color>
+    <color name="catppuccin_mocha_crust">#11111B</color>
 </resources>

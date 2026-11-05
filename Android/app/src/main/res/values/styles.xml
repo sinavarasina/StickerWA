@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="AppTheme.Catppuccin" />
 
     <!-- Catppuccin Theme (Light: Latte) -->
-    <style name="AppTheme.Catppuccin" parent="Theme.MaterialComponents.DayNight">
+    <style name="Base.AppTheme.Catppuccin" parent="Theme.MaterialComponents.DayNight">
         <item name="colorPrimary">@color/catppuccin_latte_mauve</item>
         <item name="colorPrimaryVariant">@color/catppuccin_latte_mauve</item>
         <item name="colorOnPrimary">#FFFFFF</item>
@@ -33,9 +33,10 @@
         <item name="actionBarStyle">@style/MyApp.ActionBar</item>
         <item name="actionBarTheme">@style/MyApp.ActionBarTheme</item>
     </style>
+    <style name="AppTheme.Catppuccin" parent="Base.AppTheme.Catppuccin" />
 
     <!-- Gruvbox Theme (Light: Gruvbox Light) -->
-    <style name="AppTheme.Gruvbox" parent="Theme.MaterialComponents.DayNight">
+    <style name="Base.AppTheme.Gruvbox" parent="Theme.MaterialComponents.DayNight">
         <item name="colorPrimary">@color/gruvbox_light_primary</item>
         <item name="colorPrimaryVariant">@color/gruvbox_light_primary</item>
         <item name="colorOnPrimary">#FFFFFF</item>
@@ -64,6 +65,7 @@
         <item name="actionBarStyle">@style/MyApp.ActionBar</item>
         <item name="actionBarTheme">@style/MyApp.ActionBarTheme</item>
     </style>
+    <style name="AppTheme.Gruvbox" parent="Base.AppTheme.Gruvbox" />
 
     <!-- Modern Flat Expressive Material Action Bar -->
     <style name="MyApp.ActionBar" parent="Widget.MaterialComponents.ActionBar.Solid">

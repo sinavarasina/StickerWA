@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Catppuccin Theme (Dark: Mocha) -->
-    <style name="AppTheme.Catppuccin" parent="Theme.MaterialComponents.DayNight">
+    <style name="Base.AppTheme.Catppuccin" parent="Theme.MaterialComponents.DayNight">
         <item name="colorPrimary">@color/catppuccin_mocha_mauve</item>
         <item name="colorPrimaryVariant">@color/catppuccin_mocha_mauve</item>
         <item name="colorOnPrimary">@color/catppuccin_mocha_base</item>
@@ -30,9 +30,10 @@
         <item name="actionBarStyle">@style/MyApp.ActionBar</item>
         <item name="actionBarTheme">@style/MyApp.ActionBarTheme</item>
     </style>
+    <style name="AppTheme.Catppuccin" parent="Base.AppTheme.Catppuccin" />
 
     <!-- Gruvbox Theme (Dark: Gruvbox Dark) -->
-    <style name="AppTheme.Gruvbox" parent="Theme.MaterialComponents.DayNight">
+    <style name="Base.AppTheme.Gruvbox" parent="Theme.MaterialComponents.DayNight">
         <item name="colorPrimary">@color/gruvbox_dark_primary</item>
         <item name="colorPrimaryVariant">@color/gruvbox_dark_primary</item>
         <item name="colorOnPrimary">@color/gruvbox_dark_bg_hard</item>
@@ -61,5 +62,6 @@
         <item name="actionBarStyle">@style/MyApp.ActionBar</item>
         <item name="actionBarTheme">@style/MyApp.ActionBarTheme</item>
     </style>
+    <style name="AppTheme.Gruvbox" parent="Base.AppTheme.Gruvbox" />
 
 </resources>
